@@ -1,4 +1,4 @@
-﻿const STORAGE_KEY = 'afrinaija-my-order';
+﻿const STORAGE_KEY = 'afrinaija_order';
 const WHATSAPP_NUMBER = '250782647630';
 
 const parsePrice = price => Number(String(price).replace(/[^\d]/g, '')) || 0;
@@ -6,7 +6,7 @@ const formatRwf = value => 'RWF ' + Number(value).toLocaleString('en-US');
 
 const loadOrder = () => {
   try {
-    const stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '[]');
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     if (!Array.isArray(stored)) return [];
     return stored
       .filter(item => item && item.name && item.category && Number(item.unitPrice) > 0)
@@ -45,7 +45,7 @@ export function setupMyOrder({ getCurrentSelection }) {
 
   const persist = () => {
     try {
-      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(order));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
     } catch {
       // The order remains available for this page even if browser storage is unavailable.
     }

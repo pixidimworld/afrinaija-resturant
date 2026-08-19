@@ -16,7 +16,7 @@ createServer((request, response) => {
     return;
   }
   const extension = extname(filePath).toLowerCase();
-  const cacheControl = extension === '.html' ? 'no-cache' : 'public, max-age=3600';
+  const cacheControl = extension === '.html' || extension === '.js' || extension === '.css' ? 'no-cache' : 'public, max-age=3600';
   response.writeHead(200, { 'Content-Type': types[extension] || 'application/octet-stream', 'Cache-Control': cacheControl });
   createReadStream(filePath).pipe(response);
 }).listen(port, '0.0.0.0', () => console.log(`Naija Afrinaija Pot live at http://localhost:${port}`));
