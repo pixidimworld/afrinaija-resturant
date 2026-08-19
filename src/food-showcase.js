@@ -21,6 +21,11 @@ export async function setupFoodShowcase() {
 
   const slides = [...root.querySelectorAll('.food-showcase-slide')];
   const imageElements = [...root.querySelectorAll('.food-showcase-media > img')];
+  imageElements.forEach(image => {
+    if (!image.dataset.src) return;
+    image.src = image.dataset.src;
+    delete image.dataset.src;
+  });
   const status = root.querySelector('.food-showcase-status');
   const { gsap, ScrollTrigger, SplitText } = window;
 

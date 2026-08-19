@@ -1,6 +1,38 @@
-﻿const SUPABASE_URL = 'https://ibfgtoujevkkwckxvvuy.supabase.co';
+const SUPABASE_URL = 'https://ibfgtoujevkkwckxvvuy.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_qCs28IVC7cPA3-ABWTetiQ_l8jJFCYc';
 const WHATSAPP_NUMBER = '250782647630';
+const SUPABASE_SCRIPT = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+let clientPromise;
+
+const getSupabaseClient = () => {
+  if (clientPromise) return clientPromise;
+
+  clientPromise = new Promise((resolve, reject) => {
+    const createClient = () => {
+      const client = window.supabase?.createClient?.(SUPABASE_URL, SUPABASE_KEY);
+      if (client) resolve(client);
+      else reject(new Error('Supabase client is unavailable.'));
+    };
+
+    if (window.supabase?.createClient) {
+      createClient();
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = SUPABASE_SCRIPT;
+    script.async = true;
+    script.dataset.supabaseClient = 'true';
+    script.addEventListener('load', createClient, { once: true });
+    script.addEventListener('error', () => reject(new Error('Supabase failed to load.')), { once: true });
+    document.head.append(script);
+  }).catch(error => {
+    clientPromise = undefined;
+    throw error;
+  });
+
+  return clientPromise;
+};
 
 const createWhatsAppUrl = booking => {
   const address = booking.address || 'Not provided';
@@ -28,7 +60,6 @@ export function setupReservationForm() {
   const status = form?.querySelector('.reservation-status');
   const submit = form?.querySelector('.reservation-submit');
   if (!form || !dateInput || !status || !submit) return;
-  const client = window.supabase?.createClient?.(SUPABASE_URL, SUPABASE_KEY);
 
   const today = new Date();
   const localDate = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
@@ -41,15 +72,13 @@ export function setupReservationForm() {
     delete status.dataset.state;
   });
 
+  form.addEventListener('focusin', () => {
+    getSupabaseClient().catch(() => {});
+  }, { once: true });
+
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
-
-    if (!client) {
-      status.dataset.state = 'error';
-      status.textContent = 'The booking service could not load. Please try again.';
-      return;
-    }
 
     const booking = {
       name: form.elements.name.value.trim(),
@@ -68,6 +97,7 @@ export function setupReservationForm() {
     status.textContent = 'Saving your reservation...';
 
     try {
+      const client = await getSupabaseClient();
       const { error } = await client.from('bookings').insert([booking]);
       if (error) throw error;
 

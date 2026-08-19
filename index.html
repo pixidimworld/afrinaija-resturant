@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Naija Afrinaija Pot - authentic Nigerian cuisine crafted with love, tradition, and fresh ingredients." />
     <title>Naija Afrinaija Pot | Authentic Nigerian Cuisine</title>
-    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="icon" href="/assets/images/logo.png" type="image/png" />
     <link rel="stylesheet" href="/src/styles.css" />
     <link rel="stylesheet" href="/src/reservation.css" />
@@ -59,11 +58,11 @@
         <svg class="food-loop-track" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
           <path id="food-loop-path" d="M-100,75 C75,0 425,0 600,75 C775,150 1125,150 1300,75" />
         </svg>
-        <figure class="food-loop-dish"><img src="/assets/images/dish-rotate-1.png" alt="Nigerian soup with meat and peppers" /></figure>
-        <figure class="food-loop-dish"><img src="/assets/images/dish-rotate-2.png" alt="Rich Nigerian stew with assorted meat" /></figure>
-        <figure class="food-loop-dish"><img src="/assets/images/dish-rotate-3.png" alt="Nigerian pasta with vegetables" /></figure>
-        <figure class="food-loop-dish"><img src="/assets/images/dish-rotate-4.png" alt="A featured Nigerian dish" /></figure>
-        <figure class="food-loop-dish"><img src="/assets/images/dish-rotate-5.png" alt="A second featured Nigerian dish" /></figure>
+        <figure class="food-loop-dish"><img data-src="/assets/images/dish-rotate-1.png" alt="Nigerian soup with meat and peppers" /></figure>
+        <figure class="food-loop-dish"><img data-src="/assets/images/dish-rotate-2.png" alt="Rich Nigerian stew with assorted meat" /></figure>
+        <figure class="food-loop-dish"><img data-src="/assets/images/dish-rotate-3.png" alt="Nigerian pasta with vegetables" /></figure>
+        <figure class="food-loop-dish"><img data-src="/assets/images/dish-rotate-4.png" alt="A featured Nigerian dish" /></figure>
+        <figure class="food-loop-dish"><img data-src="/assets/images/dish-rotate-5.png" alt="A second featured Nigerian dish" /></figure>
       </div>
 
       <img class="corner-leaf corner-leaf--right" src="/assets/images/leaf.png" alt="" aria-hidden="true" />
@@ -88,7 +87,7 @@
     </section>
 
     <section class="about-section" id="about" aria-labelledby="about-title">
-      <img class="about-palm" src="/assets/images/palm.png" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+      <img class="about-palm" data-deferred-src="/assets/images/palm.png" loading="lazy" decoding="async" alt="" aria-hidden="true" />
       <div class="about-copy">
         <h2 id="about-title">About Us</h2>
         <p class="about-reveal">Naija Afrinaija Pot is a celebration of authentic Nigerian food, culture and hospitality. We bring together traditional flavours, passionate people and carefully prepared dishes to create a dining experience that feels warm, familiar and unforgettable.</p>
@@ -103,63 +102,63 @@
           <article class="staff-card" aria-label="Chef or staff image placeholder"><div class="staff-card-image"></div></article>
           <article class="staff-card" aria-label="Chef or staff image placeholder"><div class="staff-card-image"></div></article>
         </div>
-        <p class="staff-label"><img src="/assets/images/chef.png" loading="lazy" decoding="async" alt="" aria-hidden="true" /><span>Our Chefs &amp; Staff</span></p>
+        <p class="staff-label"><img data-deferred-src="/assets/images/chef.png" loading="lazy" decoding="async" alt="" aria-hidden="true" /><span>Our Chefs &amp; Staff</span></p>
       </div>
     </section>
 
     <section class="food-showcase" id="food-showcase" aria-label="Featured Nigerian dishes">
       <article class="food-showcase-slide">
         <div class="food-showcase-outer"><div class="food-showcase-inner"><div class="food-showcase-media">
-          <img loading="eager" decoding="async" src="/assets/food/swallow%20and%20vegetable%20soup.jpeg" alt="Swallow served with Nigerian vegetable soup" />
+          <img loading="lazy" decoding="async" data-src="/assets/food/swallow%20and%20vegetable%20soup.jpeg" alt="Swallow served with Nigerian vegetable soup" />
           <span class="food-showcase-shade" aria-hidden="true"></span>
           <h2 class="food-showcase-heading">Swallow &amp; Vegetable Soup</h2>
         </div></div></div>
       </article>
       <article class="food-showcase-slide">
         <div class="food-showcase-outer"><div class="food-showcase-inner"><div class="food-showcase-media">
-          <img loading="eager" decoding="async" src="/assets/food/fried%20rice%20and%20protein.jpeg" alt="Nigerian fried rice served with protein" />
+          <img loading="lazy" decoding="async" data-src="/assets/food/fried%20rice%20and%20protein.jpeg" alt="Nigerian fried rice served with protein" />
           <span class="food-showcase-shade" aria-hidden="true"></span>
           <h2 class="food-showcase-heading">Fried Rice &amp; Protein</h2>
         </div></div></div>
       </article>
       <article class="food-showcase-slide">
         <div class="food-showcase-outer"><div class="food-showcase-inner"><div class="food-showcase-media">
-          <img loading="eager" decoding="async" src="/assets/food/jollof%20and%20protein.jpeg" alt="Nigerian jollof rice served with protein" />
+          <img loading="lazy" decoding="async" data-src="/assets/food/jollof%20and%20protein.jpeg" alt="Nigerian jollof rice served with protein" />
           <span class="food-showcase-shade" aria-hidden="true"></span>
           <h2 class="food-showcase-heading">Jollof Rice &amp; Protein</h2>
         </div></div></div>
       </article>
       <article class="food-showcase-slide">
         <div class="food-showcase-outer"><div class="food-showcase-inner"><div class="food-showcase-media">
-          <img loading="eager" decoding="async" src="/assets/food/swallow%20and%20egusi.jpeg" alt="Swallow served with Nigerian egusi soup" />
+          <img loading="lazy" decoding="async" data-src="/assets/food/swallow%20and%20egusi.jpeg" alt="Swallow served with Nigerian egusi soup" />
           <span class="food-showcase-shade" aria-hidden="true"></span>
           <h2 class="food-showcase-heading">Swallow &amp; Egusi</h2>
         </div></div></div>
       </article>
       <article class="food-showcase-slide">
         <div class="food-showcase-outer"><div class="food-showcase-inner"><div class="food-showcase-media">
-          <img src="/assets/food/WhatsApp%20Image%202026-08-13%20at%201.56.29%20PM.jpeg" alt="A featured Nigerian dish at Afrinaija Pot" loading="eager" decoding="async" />
+          <img data-src="/assets/food/WhatsApp%20Image%202026-08-13%20at%201.56.29%20PM.jpeg" alt="A featured Nigerian dish at Afrinaija Pot" loading="lazy" decoding="async" />
           <span class="food-showcase-shade" aria-hidden="true"></span>
           <h2 class="food-showcase-heading">Afrinaija Pot Special</h2>
         </div></div></div>
       </article>
       <article class="food-showcase-slide">
         <div class="food-showcase-outer"><div class="food-showcase-inner"><div class="food-showcase-media">
-          <img src="/assets/food/WhatsApp%20Image%202026-08-13%20at%201.56.30%20PM.jpeg" alt="A featured Nigerian meal at Afrinaija Pot" loading="eager" decoding="async" />
+          <img data-src="/assets/food/WhatsApp%20Image%202026-08-13%20at%201.56.30%20PM.jpeg" alt="A featured Nigerian meal at Afrinaija Pot" loading="lazy" decoding="async" />
           <span class="food-showcase-shade" aria-hidden="true"></span>
           <h2 class="food-showcase-heading">Flavours of Nigeria</h2>
         </div></div></div>
       </article>
       <article class="food-showcase-slide">
         <div class="food-showcase-outer"><div class="food-showcase-inner"><div class="food-showcase-media">
-          <img src="/assets/food/WhatsApp%20Image%202026-08-13%20at%201.56.48%20PM%20(1).jpeg" alt="A traditionally prepared Nigerian dish at Afrinaija Pot" loading="eager" decoding="async" />
+          <img data-src="/assets/food/WhatsApp%20Image%202026-08-13%20at%201.56.48%20PM%20(1).jpeg" alt="A traditionally prepared Nigerian dish at Afrinaija Pot" loading="lazy" decoding="async" />
           <span class="food-showcase-shade" aria-hidden="true"></span>
           <h2 class="food-showcase-heading">Prepared with Tradition</h2>
         </div></div></div>
       </article>
       <article class="food-showcase-slide">
         <div class="food-showcase-outer"><div class="food-showcase-inner"><div class="food-showcase-media">
-          <img src="/assets/food/WhatsApp%20Image%202026-08-13%20at%201.56.48%20PM.jpeg" alt="A Nigerian dish served at Afrinaija Pot" loading="eager" decoding="async" />
+          <img data-src="/assets/food/WhatsApp%20Image%202026-08-13%20at%201.56.48%20PM.jpeg" alt="A Nigerian dish served at Afrinaija Pot" loading="lazy" decoding="async" />
           <span class="food-showcase-shade" aria-hidden="true"></span>
           <h2 class="food-showcase-heading">Served with Love</h2>
         </div></div></div>

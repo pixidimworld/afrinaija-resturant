@@ -46,6 +46,13 @@ function setupFoodLoop() {
   const dishes = [...document.querySelectorAll('.food-loop-dish')];
   if (!loop || !path || !dishes.length) return;
 
+  dishes.forEach(dish => {
+    const image = dish.querySelector('img[data-src]');
+    if (!image) return;
+    image.src = image.dataset.src;
+    delete image.dataset.src;
+  });
+
   const pathLength = path.getTotalLength();
   const duration = 18000;
   let startTime;
@@ -730,21 +737,80 @@ function setupSocialTitle() {
   }, { threshold: .3 });
   observer.observe(title);
 }
+function setupFoodShowcaseWhenNear() {
+  const root = document.querySelector('.food-showcase');
+  if (!root) return;
+
+  const initialize = () => setupFoodShowcase();
+  if (!('IntersectionObserver' in window)) {
+    initialize();
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    observer.disconnect();
+    initialize();
+  }, { rootMargin: '600px 0px', threshold: 0 });
+
+  observer.observe(root);
+}
+function setupDeferredImages() {
+  const images = [...document.querySelectorAll('img[data-deferred-src]')];
+  if (!images.length) return;
+
+  const load = image => {
+    image.src = image.dataset.deferredSrc;
+    delete image.dataset.deferredSrc;
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    images.forEach(load);
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      load(entry.target);
+    });
+  }, { rootMargin: '80px 0px', threshold: 0 });
+
+  images.forEach(image => observer.observe(image));
+}
 setupSmoothScroll();
+setupDeferredImages();
 setupFoldText();
-setupFoodLoop();
-setupTextLoop();
-setupAboutTextReveal();
-setupAboutDecorations();
-setupStaffCarousel();
-setupExperienceCarousel();
-setupExperienceEntrance();
-setupSocialTitle();
-setupTestimonialsStack();
 setupBookingTransition();
 setupReservationForm();
 setupQuickNavigation();
-setupFoodShowcase();
+
+let deferredFeaturesStarted = false;
+const startDeferredFeatures = () => {
+  if (deferredFeaturesStarted) return;
+  deferredFeaturesStarted = true;
+
+  const initialize = () => {
+    setupFoodLoop();
+    setupTextLoop();
+    setupAboutTextReveal();
+    setupAboutDecorations();
+    setupStaffCarousel();
+    setupExperienceCarousel();
+    setupExperienceEntrance();
+    setupSocialTitle();
+    setupTestimonialsStack();
+    setupFoodShowcaseWhenNear();
+  };
+
+  if ('requestIdleCallback' in window) window.requestIdleCallback(initialize, { timeout: 700 });
+  else window.setTimeout(initialize, 32);
+};
+
+window.addEventListener('afrinaija:hero-ready', startDeferredFeatures, { once: true });
+if (reduceMotion.matches) startDeferredFeatures();
+window.setTimeout(startDeferredFeatures, 3500);
 
 
 
