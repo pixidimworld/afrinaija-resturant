@@ -1,42 +1,48 @@
 (() => {
   const dish = document.querySelector('.main-dish');
-  const gsap = window.gsap;
+  const stage = dish?.closest('.dish-stage');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const announceReady = () => window.dispatchEvent(new CustomEvent('afrinaija:hero-ready'));
+  const announceReady = () => {
+    document.documentElement.dataset.heroReady = 'true';
+    window.dispatchEvent(new CustomEvent('afrinaija:hero-ready'));
+  };
 
-  if (!dish || !gsap || reduceMotion) {
+  if (!dish || !stage || reduceMotion) {
+    stage?.classList.add('is-hero-arrived');
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', announceReady, { once: true });
     else announceReady();
     return;
   }
 
-  const mobile = window.matchMedia('(max-width: 900px)').matches;
-  const start = mobile ? { xPercent: -135, yPercent: 0 } : { xPercent: 0, yPercent: -145 };
-  gsap.set(dish, { ...start, force3D: true, willChange: 'transform' });
+  dish.classList.add('is-hero-pending');
 
-  const pageReady = document.readyState === 'complete'
-    ? Promise.resolve()
-    : new Promise(resolve => window.addEventListener('load', resolve, { once: true }));
   const imageReady = dish.complete
     ? dish.decode?.().catch(() => {})
-    : new Promise(resolve => dish.addEventListener('load', resolve, { once: true })).then(() => dish.decode?.().catch(() => {}));
+    : new Promise(resolve => {
+      dish.addEventListener('load', resolve, { once: true });
+      dish.addEventListener('error', resolve, { once: true });
+    }).then(() => dish.decode?.().catch(() => {}));
 
-  Promise.all([pageReady, imageReady]).then(() => {
-    requestAnimationFrame(() => requestAnimationFrame(() => {
+  imageReady.then(() => {
+    requestAnimationFrame(() => {
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        dish.removeEventListener('animationend', finish);
+        dish.classList.remove('is-hero-entering');
+        stage.classList.remove('is-hero-animating');
+        stage.classList.add('is-hero-arrived');
+        performance.mark('afrinaija-hero-entrance-end');
+        announceReady();
+      };
+
       performance.mark('afrinaija-hero-entrance-start');
-      gsap.to(dish, {
-        xPercent: 0,
-        yPercent: 0,
-        duration: 1.05,
-        ease: 'power3.out',
-        force3D: true,
-        overwrite: true,
-        onComplete: () => {
-          performance.mark('afrinaija-hero-entrance-end');
-          announceReady();
-          requestAnimationFrame(() => gsap.set(dish, { clearProps: 'transform,willChange' }));
-        }
-      });
-    }));
+      stage.classList.add('is-hero-animating');
+      dish.classList.remove('is-hero-pending');
+      dish.classList.add('is-hero-entering');
+      dish.addEventListener('animationend', finish, { once: true });
+      window.setTimeout(finish, 950);
+    });
   });
 })();

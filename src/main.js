@@ -785,6 +785,7 @@ setupFoldText();
 setupBookingTransition();
 setupReservationForm();
 setupQuickNavigation();
+setupFoodLoop();
 
 let deferredFeaturesStarted = false;
 const startDeferredFeatures = () => {
@@ -792,7 +793,6 @@ const startDeferredFeatures = () => {
   deferredFeaturesStarted = true;
 
   const initialize = () => {
-    setupFoodLoop();
     setupTextLoop();
     setupAboutTextReveal();
     setupAboutDecorations();
@@ -809,7 +809,7 @@ const startDeferredFeatures = () => {
 };
 
 window.addEventListener('afrinaija:hero-ready', startDeferredFeatures, { once: true });
-if (reduceMotion.matches) startDeferredFeatures();
+if (reduceMotion.matches || document.documentElement.dataset.heroReady === 'true') startDeferredFeatures();
 window.setTimeout(startDeferredFeatures, 3500);
 
 

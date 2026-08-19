@@ -115,7 +115,33 @@ html[data-smooth-scroll='lenis'] { scroll-behavior: auto; }
   height: 96%;
   object-fit: cover;
   image-rendering: auto;
-  filter: drop-shadow(0 28px 18px rgb(13 41 18 / .2));
+  backface-visibility: hidden;
+}
+.dish-stage::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 16% 10% 7%;
+  border-radius: 50%;
+  box-shadow: 0 28px 22px rgb(13 41 18 / .2);
+  opacity: 0;
+  transition: opacity .28s ease;
+  pointer-events: none;
+}
+.dish-stage.is-hero-animating::after,
+.dish-stage.is-hero-arrived::after { opacity: 1; }
+.main-dish.is-hero-pending { transform: translate3d(0, -145%, 0); }
+.main-dish.is-hero-entering {
+  animation: hero-dish-enter-desktop .78s cubic-bezier(.22, 1, .36, 1) both;
+  will-change: transform;
+}
+@keyframes hero-dish-enter-desktop {
+  from { transform: translate3d(0, -145%, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes hero-dish-enter-mobile {
+  from { transform: translate3d(-135%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
 }
 .dish-ring {
   position: absolute;
@@ -406,6 +432,8 @@ body.nav-open { overflow: hidden; }
   .intro p { font-size: clamp(14px, 3.55vw, 20px); line-height: 1.42; }
 
   .dish-stage { width: min(55.8vw, 28.8svh, 432px); margin: 0 auto; align-self: center; }
+  .main-dish.is-hero-pending { transform: translate3d(-135%, 0, 0); }
+  .main-dish.is-hero-entering { animation-name: hero-dish-enter-mobile; }
   .accent-leaf--one { right: -7%; top: 1%; }
   .accent-leaf--two { left: -8%; bottom: 17%; }
 
