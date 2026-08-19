@@ -14,7 +14,9 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; min-width: 320px; overflow-x: hidden; }
-button, a { font: inherit; }
+button, a { font: inherit; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+button { user-select: none; }
+html[data-smooth-scroll='lenis'] { scroll-behavior: auto; }
 .hero {
   position: relative;
   min-height: 100svh;

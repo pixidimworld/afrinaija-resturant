@@ -1,6 +1,7 @@
 import { setupReservationForm } from './reservation.js';
 import { setupQuickNavigation } from './navigation.js';
 import { setupFoodShowcase } from './food-showcase.js';
+import { setupSmoothScroll, scrollToTarget, setSmoothScrollPaused } from './smooth-scroll.js';
 
 const menuButton = document.querySelector('.menu-button');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -49,6 +50,7 @@ function setupFoodLoop() {
   const duration = 18000;
   let startTime;
   let frameId;
+  let isVisible = true;
 
   const placeDishes = (progress = 0) => {
     const scaleX = loop.clientWidth / 1200;
@@ -70,12 +72,21 @@ function setupFoodLoop() {
     cancelAnimationFrame(frameId);
     startTime = undefined;
     placeDishes();
-    if (!reduceMotion.matches) frameId = requestAnimationFrame(animate);
+    const shouldRun = isVisible && !document.hidden && !reduceMotion.matches;
+    loop.dataset.loopRunning = String(shouldRun);
+    if (shouldRun) frameId = requestAnimationFrame(animate);
   };
 
+  const observer = new IntersectionObserver(entries => {
+    isVisible = entries.some(entry => entry.isIntersecting);
+    updateMotion();
+  }, { rootMargin: '120px 0px', threshold: 0 });
+
+  observer.observe(loop);
   reduceMotion.addEventListener('change', updateMotion);
+  document.addEventListener('visibilitychange', updateMotion);
   window.addEventListener('resize', () => {
-    if (reduceMotion.matches) placeDishes();
+    if (!isVisible || reduceMotion.matches) placeDishes();
   });
   updateMotion();
 }
@@ -95,6 +106,7 @@ function setupTextLoop() {
     let offset = 0;
     let previousTime;
     let frameId;
+    let isVisible = false;
 
     const apply = value => {
       const partner = value >= 0 ? value - pathLength : value + pathLength;
@@ -111,12 +123,12 @@ function setupTextLoop() {
       frameId = requestAnimationFrame(animate);
     };
 
-    const start = () => {
+    const updateMotion = () => {
       cancelAnimationFrame(frameId);
       previousTime = undefined;
-      offset = 0;
-      apply(0);
-      if (!reduceMotion.matches && speed > 0) frameId = requestAnimationFrame(animate);
+      const shouldRun = isVisible && !document.hidden && !reduceMotion.matches && speed > 0;
+      root.dataset.loopRunning = String(shouldRun);
+      if (shouldRun) frameId = requestAnimationFrame(animate);
     };
 
     const measure = () => {
@@ -129,14 +141,23 @@ function setupTextLoop() {
         textPath.setAttribute('textLength', String(pathLength));
         textPath.setAttribute('lengthAdjust', 'spacing');
       });
-      start();
+      apply(offset);
+      updateMotion();
     };
 
-    reduceMotion.addEventListener('change', start);
+    const observer = new IntersectionObserver(entries => {
+      isVisible = entries.some(entry => entry.isIntersecting);
+      updateMotion();
+    }, { rootMargin: '180px 0px', threshold: 0 });
+
+    observer.observe(root);
+    reduceMotion.addEventListener('change', updateMotion);
+    document.addEventListener('visibilitychange', updateMotion);
     measure();
     document.fonts?.ready.then(measure).catch(() => {});
   });
-}function setupAboutTextReveal() {
+}
+function setupAboutTextReveal() {
   const paragraph = document.querySelector('.about-reveal');
   if (!paragraph) return;
 
@@ -302,15 +323,28 @@ function setupExperienceCarousel() {
     const figure = document.createElement('figure');
     figure.className = 'experience-card';
     const image = document.createElement('img');
-    image.src = `/assets/environment-images/${filename}`;
+    image.dataset.src = `/assets/environment-images/${filename}`;
     image.alt = `Naija Afrinaija Pot restaurant environment ${index + 1}`;
-    image.loading = index < 5 ? 'eager' : 'lazy';
+    image.loading = 'lazy';
     image.decoding = 'async';
     image.draggable = false;
     figure.append(image);
     cardsRoot.append(figure);
     return figure;
   });
+
+  const loadImages = () => {
+    cardsRoot.querySelectorAll('img[data-src]').forEach(image => {
+      image.src = image.dataset.src;
+      delete image.dataset.src;
+    });
+  };
+  const loadObserver = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    loadObserver.disconnect();
+    loadImages();
+  }, { rootMargin: '1200px 0px', threshold: 0 });
+  loadObserver.observe(carousel);
 
   const state = { position: 0 };
   let dragging = false;
@@ -575,6 +609,7 @@ function setupBookingTransition() {
     overlay.classList.add('is-active');
     overlay.setAttribute('aria-hidden', 'false');
     document.body.classList.add('booking-open');
+    setSmoothScrollPaused(true);
     if (reduceMotion.matches) draw(states.open);
     else {
       await tween(states.closed, states.middle, 480, power2In);
@@ -597,6 +632,7 @@ function setupBookingTransition() {
     overlay.classList.remove('is-active');
     overlay.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('booking-open');
+    if (!document.body.classList.contains('nav-open')) setSmoothScrollPaused(false);
     animating = false;
     activeTrigger.focus();
   };
@@ -625,6 +661,8 @@ function setNavigation(isOpen, restoreFocus = true) {
   menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
   menuButton.classList.toggle('is-open', isOpen);
   document.body.classList.toggle('nav-open', isOpen);
+  if (isOpen) setSmoothScrollPaused(true);
+  else if (!document.body.classList.contains('booking-open')) setSmoothScrollPaused(false);
 
   if (isOpen) requestAnimationFrame(() => navClose.focus());
   else {
@@ -648,7 +686,7 @@ navLinks.forEach(link => link.addEventListener('click', event => {
   if (!target) return;
   event.preventDefault();
   requestAnimationFrame(() => {
-    target.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+    scrollToTarget(target);
     history.pushState(null, '', destination);
   });
 }));
@@ -692,6 +730,7 @@ function setupSocialTitle() {
   }, { threshold: .3 });
   observer.observe(title);
 }
+setupSmoothScroll();
 setupFoldText();
 setupFoodLoop();
 setupTextLoop();

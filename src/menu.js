@@ -1,4 +1,4 @@
-﻿import { setupMyOrder } from './order.js';
+import { setupMyOrder } from './order.js';
 
 const riceAndMeats = [
   { name: 'Jollof Rice', price: 'RWF 12,000', image: '/assets/images/main-dish.png', description: 'Smoky Nigerian jollof rice served with a carefully prepared protein.' },
@@ -210,7 +210,28 @@ function setupMenuPage() {
   let activeCategory = 'Rice & Meats';
   let activeIndex = 0;
   let transitioning = false;
+  let activeTimeline;
   const targets = [title, imageStage, price, details, count];
+
+  const finishActiveTransition = () => {
+    if (!transitioning || !activeTimeline) return;
+    const timeline = activeTimeline;
+    activeTimeline = null;
+    transitioning = false;
+    timeline.progress(1);
+    timeline.kill();
+  };
+
+  const createTransition = () => {
+    transitioning = true;
+    activeTimeline = gsap.timeline({
+      onComplete: () => {
+        transitioning = false;
+        activeTimeline = null;
+      }
+    });
+    return activeTimeline;
+  };
 
   const getMeals = () => menuCategories[activeCategory];
 
@@ -244,12 +265,11 @@ function setupMenuPage() {
   };
 
   const moveTo = nextIndex => {
-    if (transitioning) return;
-    transitioning = true;
+    finishActiveTransition();
     const meals = getMeals();
     const wrappedIndex = (nextIndex + meals.length) % meals.length;
     const direction = wrappedIndex > activeIndex || (activeIndex === meals.length - 1 && wrappedIndex === 0) ? 1 : -1;
-    gsap.timeline({ onComplete: () => { transitioning = false; } })
+    createTransition()
       .to(targets, { autoAlpha: 0, x: -22 * direction, duration: .24, ease: 'power2.in', stagger: .025 })
       .add(() => {
         activeIndex = wrappedIndex;
@@ -267,15 +287,15 @@ function setupMenuPage() {
   };
 
   const changeCategory = category => {
-    if (transitioning || !menuCategories[category]) return;
+    if (!menuCategories[category]) return;
+    finishActiveTransition();
     if (category === activeCategory) {
       setCategoryOpen(false);
       return;
     }
 
-    transitioning = true;
     setCategoryOpen(false);
-    gsap.timeline({ onComplete: () => { transitioning = false; } })
+    createTransition()
       .to(targets, { autoAlpha: 0, x: -22, duration: .24, ease: 'power2.in', stagger: .025 })
       .add(() => {
         activeCategory = category;
@@ -287,15 +307,29 @@ function setupMenuPage() {
       .to(targets, { autoAlpha: 1, x: 0, duration: .48, ease: 'power3.out', stagger: .035 });
   };
 
-  previous.addEventListener('click', () => moveTo(activeIndex - 1));
-  next.addEventListener('click', () => moveTo(activeIndex + 1));
+  previous.addEventListener('click', () => {
+    finishActiveTransition();
+    moveTo(activeIndex - 1);
+  });
+  next.addEventListener('click', () => {
+    finishActiveTransition();
+    moveTo(activeIndex + 1);
+  });
   categoryToggle.addEventListener('click', () => setCategoryOpen(categoryToggle.getAttribute('aria-expanded') !== 'true'));
   categoryButtons.forEach(button => {
     button.addEventListener('click', () => changeCategory(button.dataset.category));
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') { event.preventDefault(); moveTo(activeIndex - 1); }
-    if (event.key === 'ArrowRight') { event.preventDefault(); moveTo(activeIndex + 1); }
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      finishActiveTransition();
+      moveTo(activeIndex - 1);
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      finishActiveTransition();
+      moveTo(activeIndex + 1);
+    }
   });
 
   updateCategoryButtons();
@@ -312,6 +346,33 @@ function setupMenuPage() {
   });
 }
 
+function setupMenuEntrance() {
+  const curtain = document.querySelector('.menu-page-entrance');
+  const gsap = window.gsap;
+  if (!curtain) return;
+  if (!gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    curtain.remove();
+    return;
+  }
+
+  const header = document.querySelector('.menu-page-header');
+  const kicker = document.querySelector('.menu-page-kicker');
+  const title = document.querySelector('.menu-meal-title');
+  const image = document.querySelector('.menu-meal-image-stage');
+  const controls = [...document.querySelectorAll('.menu-meal-arrow, .menu-meal-meta, .menu-meal-description, .menu-meal-count, .menu-category-toggle, .my-order-floating')];
+  const content = [header, kicker, title, image, ...controls].filter(Boolean);
+
+  gsap.set(content, { autoAlpha: 0 });
+  gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: () => curtain.remove() })
+    .to(curtain.querySelector('span'), { autoAlpha: 0, y: -16, duration: .3, ease: 'power2.in' })
+    .to(curtain, { yPercent: -100, duration: .78, ease: 'power3.inOut' })
+    .fromTo(header, { y: -20 }, { autoAlpha: 1, y: 0, duration: .5 }, '-=.38')
+    .fromTo(kicker, { y: -12 }, { autoAlpha: 1, y: 0, duration: .45 }, '<.06')
+    .fromTo(title, { scale: .94 }, { autoAlpha: 1, scale: 1, duration: .65 }, '<')
+    .fromTo(image, { y: 42, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: .72 }, '<.06')
+    .fromTo(controls, { y: 18 }, { autoAlpha: 1, y: 0, duration: .48, stagger: .035 }, '-=.44');
+}
 setupMenuPage();
+setupMenuEntrance();
 
 

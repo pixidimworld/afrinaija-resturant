@@ -1,4 +1,4 @@
-﻿export function setupQuickNavigation() {
+export function setupQuickNavigation() {
   const root = document.querySelector('.floating-navigation');
   const toggle = document.querySelector('.quick-navigation-toggle');
   const card = document.querySelector('.quick-navigation-card');
@@ -23,7 +23,8 @@
     if (!target) return;
     event.preventDefault();
     requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      if (window.afrinaijaScroll && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) window.afrinaijaScroll.scrollTo(target, { duration: 1.05, force: true });
+      else target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
       history.pushState(null, '', destination);
     });
   }));

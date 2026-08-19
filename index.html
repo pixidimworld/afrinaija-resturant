@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/src/reservation.css" />
     <link rel="stylesheet" href="/src/navigation.css" />
     <link rel="stylesheet" href="/src/food-showcase.css" />
+    <link rel="stylesheet" href="/assets/vendor/lenis.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,7 +41,7 @@
         <div class="dish-stage">
           <span class="dish-ring dish-ring--outer" aria-hidden="true"></span>
           <span class="dish-ring dish-ring--inner" aria-hidden="true"></span>
-          <img class="main-dish" src="/assets/images/main-dish.png" alt="A Nigerian rice dish served with a glazed chicken drumstick" fetchpriority="high" />
+          <img class="main-dish" src="/assets/images/main-dish.png" decoding="async" alt="A Nigerian rice dish served with a glazed chicken drumstick" fetchpriority="high" />
           <img class="accent-leaf accent-leaf--one" src="/assets/images/leaf.png" alt="" aria-hidden="true" />
           <img class="accent-leaf accent-leaf--two" src="/assets/images/leaf.png" alt="" aria-hidden="true" />
         </div>
@@ -87,7 +88,7 @@
     </section>
 
     <section class="about-section" id="about" aria-labelledby="about-title">
-      <img class="about-palm" src="/assets/images/palm.png" alt="" aria-hidden="true" />
+      <img class="about-palm" src="/assets/images/palm.png" loading="lazy" decoding="async" alt="" aria-hidden="true" />
       <div class="about-copy">
         <h2 id="about-title">About Us</h2>
         <p class="about-reveal">Naija Afrinaija Pot is a celebration of authentic Nigerian food, culture and hospitality. We bring together traditional flavours, passionate people and carefully prepared dishes to create a dining experience that feels warm, familiar and unforgettable.</p>
@@ -102,7 +103,7 @@
           <article class="staff-card" aria-label="Chef or staff image placeholder"><div class="staff-card-image"></div></article>
           <article class="staff-card" aria-label="Chef or staff image placeholder"><div class="staff-card-image"></div></article>
         </div>
-        <p class="staff-label"><img src="/assets/images/chef.png" alt="" aria-hidden="true" /><span>Our Chefs &amp; Staff</span></p>
+        <p class="staff-label"><img src="/assets/images/chef.png" loading="lazy" decoding="async" alt="" aria-hidden="true" /><span>Our Chefs &amp; Staff</span></p>
       </div>
     </section>
 
@@ -167,10 +168,10 @@
       <p class="food-showcase-status nav-sr-only" aria-live="polite"></p>
     </section>
     <section class="experience-section" id="experience" aria-labelledby="experience-title">
-      <img class="experience-leaf experience-leaf-top" src="/assets/images/leaf.png" alt="" aria-hidden="true" />
-      <img class="experience-leaf experience-leaf-bottom" src="/assets/images/leaf.png" alt="" aria-hidden="true" />
-      <img class="experience-edge-dish experience-edge-dish-left" src="/assets/images/dish-rotate-5.png" alt="" aria-hidden="true" />
-      <img class="experience-edge-dish experience-edge-dish-right" src="/assets/images/dish-rotate-5.png" alt="" aria-hidden="true" />
+      <img class="experience-leaf experience-leaf-top" src="/assets/images/leaf.png" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+      <img class="experience-leaf experience-leaf-bottom" src="/assets/images/leaf.png" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+      <img class="experience-edge-dish experience-edge-dish-left" src="/assets/images/dish-rotate-5.png" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+      <img class="experience-edge-dish experience-edge-dish-right" src="/assets/images/dish-rotate-5.png" loading="lazy" decoding="async" alt="" aria-hidden="true" />
       <header class="experience-header">
         <h2 id="experience-title">Environment &amp; Restaurant Experience</h2>
         <p>Step into a warm and welcoming space where Nigerian culture, comfort and great food come together.</p>
@@ -191,8 +192,8 @@
           </div>
         </div>
         <figure class="location-gallery" aria-label="Naija Afrinaija Pot restaurant location">
-          <img class="location-image location-image-main" src="/assets/location.jpeg" alt="Naija Afrinaija Pot restaurant location" />
-          <img class="location-image location-image-secondary" src="/assets/location2.jpeg" alt="A second view of the Naija Afrinaija Pot restaurant location" />
+          <img class="location-image location-image-main" src="/assets/location.jpeg" loading="lazy" decoding="async" alt="Naija Afrinaija Pot restaurant location" />
+          <img class="location-image location-image-secondary" src="/assets/location2.jpeg" loading="lazy" decoding="async" alt="A second view of the Naija Afrinaija Pot restaurant location" />
         </figure>
       </div>
 
@@ -339,7 +340,7 @@
     <div class="nav-overlay" id="site-navigation" aria-hidden="true">
       <button class="nav-backdrop" type="button" aria-label="Close navigation"></button>
       <aside class="nav-panel" role="dialog" aria-modal="true" aria-labelledby="nav-title">
-        <img class="nav-leaf" src="/assets/images/leaf.png" alt="" aria-hidden="true" />
+        <img class="nav-leaf" src="/assets/images/leaf.png" loading="lazy" decoding="async" alt="" aria-hidden="true" />
         <div class="nav-panel-header">
           <div>
             <span class="nav-panel-brand">Afrinaija Pot</span>
@@ -399,8 +400,9 @@
 
       </div>
     </div>
-    <script src="/assets/vendor/gsap.min.js"></script>
+
     <script src="/assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="/assets/vendor/lenis.min.js"></script>
     <script src="/assets/vendor/SplitText.min.js"></script>
     <script type="module" src="/src/main.js"></script>
   </body>
