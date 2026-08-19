@@ -1,6 +1,9 @@
 .booking-page {
   overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
   background: #f7f8f4;
   color: #151b16;
 }

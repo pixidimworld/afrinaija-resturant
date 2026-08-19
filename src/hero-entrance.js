@@ -1,19 +1,36 @@
-﻿(() => {
+(() => {
   const dish = document.querySelector('.main-dish');
   const gsap = window.gsap;
   if (!dish || !gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const mobile = window.matchMedia('(max-width: 900px)').matches;
-  gsap.fromTo(
-    dish,
-    mobile ? { xPercent: -135, yPercent: 0 } : { xPercent: 0, yPercent: -145 },
-    {
-      xPercent: 0,
-      yPercent: 0,
-      duration: 0.9,
-      ease: 'power3.out',
-      force3D: true,
-      onComplete: () => gsap.set(dish, { clearProps: 'transform,willChange' })
-    }
-  );
+  const start = mobile ? { xPercent: -135, yPercent: 0 } : { xPercent: 0, yPercent: -145 };
+  gsap.set(dish, { ...start, force3D: true, willChange: 'transform' });
+
+  const pageReady = document.readyState === 'complete'
+    ? Promise.resolve()
+    : new Promise(resolve => window.addEventListener('load', resolve, { once: true }));
+  const imageReady = dish.complete
+    ? dish.decode?.().catch(() => {})
+    : new Promise(resolve => dish.addEventListener('load', resolve, { once: true })).then(() => dish.decode?.().catch(() => {}));
+
+  Promise.all([pageReady, imageReady]).then(() => {
+    window.setTimeout(() => {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        performance.mark('afrinaija-hero-entrance-start');
+        gsap.to(dish, {
+          xPercent: 0,
+          yPercent: 0,
+          duration: 1.05,
+          ease: 'power3.out',
+          force3D: true,
+          overwrite: true,
+          onComplete: () => {
+            performance.mark('afrinaija-hero-entrance-end');
+            requestAnimationFrame(() => gsap.set(dish, { clearProps: 'transform,willChange' }));
+          }
+        });
+      }));
+    }, 280);
+  });
 })();
