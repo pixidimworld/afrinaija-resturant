@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -97,16 +97,24 @@
         <p class="about-reveal">Naija Afrinaija Pot is a celebration of authentic Nigerian food, culture and hospitality. We bring together traditional flavours, passionate people and carefully prepared dishes to create a dining experience that feels warm, familiar and unforgettable.</p>
       </div>
       <div class="staff-showcase">
-        <div class="staff-carousel" aria-label="Our chefs and staff image placeholders">
-          <svg class="staff-arc" viewBox="0 0 1200 430" preserveAspectRatio="none" aria-hidden="true">
-            <path id="staff-arc-path" d="M 1320 390 C 1010 -55 250 -55 -120 390" />
-          </svg>
-          <article class="staff-card" aria-label="Chef or staff image placeholder"><div class="staff-card-image"></div></article>
-          <article class="staff-card" aria-label="Chef or staff image placeholder"><div class="staff-card-image"></div></article>
-          <article class="staff-card" aria-label="Chef or staff image placeholder"><div class="staff-card-image"></div></article>
-          <article class="staff-card" aria-label="Chef or staff image placeholder"><div class="staff-card-image"></div></article>
+        <div class="staff-composition" aria-label="Our chefs and staff">
+          <article class="staff-card staff-card--left">
+            <div class="staff-card-frame">
+              <img data-deferred-src="/staff/staff1.jpeg" loading="lazy" decoding="async" alt="Afrinaija Pot staff member" />
+            </div>
+          </article>
+          <article class="staff-card staff-card--center">
+            <div class="staff-card-frame">
+              <img data-deferred-src="/staff/staff2.jpeg" loading="lazy" decoding="async" alt="Afrinaija Pot staff member" />
+            </div>
+          </article>
+          <article class="staff-card staff-card--right">
+            <div class="staff-card-frame">
+              <img data-deferred-src="/assets/menu/Full Chicken Suya.png" loading="lazy" decoding="async" alt="Full chicken suya at Afrinaija Pot" />
+            </div>
+          </article>
         </div>
-        <p class="staff-label"><img data-deferred-src="/assets/images/chef.png" loading="lazy" decoding="async" alt="" aria-hidden="true" /><span>Our Chefs &amp; Staff</span></p>
+        <p class="staff-label"><img data-deferred-src="/assets/images/chef.png" loading="lazy" decoding="async" alt="" aria-hidden="true" /><span>Our team  </span></p>
       </div>
     </section>
 
@@ -181,6 +189,21 @@
       </header>
       <div class="experience-carousel" tabindex="0" aria-label="Restaurant environment gallery">
         <div class="experience-cards"></div>
+      </div>
+    </section>
+    <section class="catering-section" id="catering" aria-labelledby="catering-title" style="position: relative; overflow: hidden; padding: clamp(80px, 8vw, 130px) clamp(20px, 5vw, 78px); background: #fff; text-align: center; border-bottom: 1px solid #eef2e9;">
+      <img src="/assets/images/dish-rotate-1.png" alt="" aria-hidden="true" style="position: absolute; top: -5%; right: -5%; width: clamp(150px, 20vw, 300px); opacity: 0.15; transform: rotate(-15deg); pointer-events: none; z-index: 0;" />
+      <img src="/assets/images/dish-rotate-4.png" alt="" aria-hidden="true" style="position: absolute; top: 15%; right: -8%; width: clamp(120px, 15vw, 220px); opacity: 0.12; transform: rotate(25deg); pointer-events: none; z-index: 0;" />
+      <div class="experience-header" style="position: relative; z-index: 1; max-width: 900px; margin: 0 auto;">
+        <p class="section-kicker">Specializing in West &amp; East African Cuisine</p>
+        <h2 id="catering-title" class="animated-title" style="margin-bottom: 24px; will-change: transform, opacity;">Catering Services</h2>
+        <p style="margin-bottom: 40px; color: #303731; font-size: clamp(18px, 1.6vw, 23px); line-height: 1.6;">
+          Afrinaija Pot offers exceptional catering services for your special events. Whether it's weddings, eat-in &amp; deliveries, birthdays, outdoor catering, house parties, corporate dinners, exclusive meetings, office lunches, baby showers, and many more &mdash; just chat or contact us to make your event unforgettable!
+        </p>
+        <a class="book-button" href="tel:+250782647630" aria-label="Call Afrinaija Pot for catering" style="margin: 0 auto; width: fit-content; padding-left: 34px; padding-right: 24px;">
+          <span>Call Us: 0782 647 630</span>
+          <svg viewBox="0 0 28 18" aria-hidden="true" style="margin-left: 15px;"><path d="M1 9h24M18 2l7 7-7 7" /></svg>
+        </a>
       </div>
     </section>
     <section class="contact-testimonials-section" id="contact" aria-labelledby="contact-title">
@@ -323,7 +346,7 @@
               </label>
               <label class="reservation-field">
                 <span>Number of Guests</span>
-                <input id="guests" type="number" name="guests" placeholder="How many people?" min="1" max="30" inputmode="numeric" required />
+                <input id="guests" type="number" name="guests" placeholder="How many people?" min="1" max="400" step="1" inputmode="numeric" required />
               </label>
               <label class="reservation-field">
                 <span>Address</span>
@@ -337,6 +360,25 @@
             <button class="reservation-submit" type="submit"><span>Book Reservation</span><span aria-hidden="true">&#8594;</span></button>
             <p class="reservation-status" role="status" aria-live="polite"></p>
           </form>
+        </div>
+        <div class="commitment-overlay" aria-hidden="true">
+          <section class="commitment-modal" role="dialog" aria-modal="true" aria-labelledby="commitment-title" aria-describedby="commitment-message">
+            <p class="commitment-eyebrow">Commitment confirmation</p>
+            <h3 id="commitment-title">Large Group Reservation</h3>
+            <p id="commitment-message">For reservations of 5 guests or more, an advance commitment payment of RWF 20,000 per guest is required to secure your reservation.</p>
+            <dl class="commitment-summary">
+              <div><dt>Number of guests</dt><dd data-commitment-guests>5</dd></div>
+              <div><dt>Commitment per guest</dt><dd>RWF 20,000</dd></div>
+            </dl>
+            <div class="commitment-total">
+              <span>Total commitment</span>
+              <strong data-commitment-total>RWF 100,000</strong>
+            </div>
+            <div class="commitment-actions">
+              <button class="commitment-primary" type="button">Proceed to Payment</button>
+              <button class="commitment-secondary" type="button">Not Yet</button>
+            </div>
+          </section>
         </div>
       </section>
     </div>
@@ -410,10 +452,6 @@
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
-
-
-
-
 
 
 

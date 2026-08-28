@@ -166,6 +166,154 @@
 .reservation-status[data-state='success'] { color: #17642f; }
 .reservation-status[data-state='error'] { color: #a32c2c; }
 
+.commitment-overlay {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  background: rgb(6 31 17 / .62);
+  transition: opacity .22s ease, visibility .22s ease;
+}
+
+.commitment-overlay.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.commitment-modal {
+  width: min(510px, 100%);
+  max-height: calc(100svh - 32px);
+  overflow-y: auto;
+  padding: clamp(26px, 5vw, 42px);
+  border: 1px solid rgb(11 77 43 / .14);
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 28px 72px rgb(4 31 16 / .24);
+  transform: translateY(18px) scale(.975);
+  transition: transform .24s cubic-bezier(.22, 1, .36, 1);
+}
+
+.commitment-overlay.is-open .commitment-modal {
+  transform: translateY(0) scale(1);
+}
+
+.commitment-eyebrow {
+  margin: 0 0 12px;
+  color: #287140;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.commitment-modal h3 {
+  margin: 0;
+  color: #073d1e;
+  font: 800 clamp(34px, 7vw, 50px)/.95 'League Spartan', sans-serif;
+  letter-spacing: -.035em;
+}
+
+.commitment-modal > p:not(.commitment-eyebrow) {
+  margin: 18px 0 0;
+  color: #4d5750;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.commitment-summary {
+  display: grid;
+  gap: 0;
+  margin: 26px 0 0;
+  border-top: 1px solid #e0e7df;
+}
+
+.commitment-summary div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e0e7df;
+}
+
+.commitment-summary dt,
+.commitment-summary dd {
+  margin: 0;
+  font-size: 14px;
+}
+
+.commitment-summary dt { color: #657068; }
+.commitment-summary dd { color: #173820; font-weight: 700; text-align: right; }
+
+.commitment-total {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 18px;
+  background: #eef4ea;
+}
+
+.commitment-total span {
+  display: block;
+  color: #526057;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.commitment-total strong {
+  display: block;
+  margin-top: 8px;
+  color: #073d1e;
+  font: 800 clamp(30px, 7vw, 44px)/1 'League Spartan', sans-serif;
+  letter-spacing: -.025em;
+}
+
+.commitment-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.commitment-actions button {
+  min-height: 52px;
+  padding: 0 20px;
+  border-radius: 14px;
+  font: 700 12px/1 'DM Sans', sans-serif;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.commitment-primary {
+  border: 1px solid #0b4d2b;
+  color: #fff;
+  background: #0b4d2b;
+}
+
+.commitment-primary:hover { background: #073d1e; transform: translateY(-1px); }
+
+.commitment-secondary {
+  border: 1px solid #ccd8cc;
+  color: #173820;
+  background: #fff;
+}
+
+.commitment-secondary:hover { border-color: #287140; background: #f3f7f1; }
+
+.commitment-actions button:focus-visible {
+  outline: 3px solid rgb(40 113 64 / .24);
+  outline-offset: 3px;
+}
+
 .reservation-food {
   position: absolute;
   z-index: 0;
@@ -265,6 +413,11 @@
     width: 52px;
     height: 52px;
   }
+
+  .commitment-overlay { padding: 14px; }
+  .commitment-modal { padding: 26px 20px; border-radius: 23px; }
+  .commitment-actions { grid-template-columns: 1fr; }
+  .commitment-secondary { order: 2; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -272,6 +425,12 @@
   .reservation-submit span:last-child,
   .reservation-field input,
   .reservation-field textarea {
+    transition: none;
+  }
+
+  .commitment-overlay,
+  .commitment-modal,
+  .commitment-actions button {
     transition: none;
   }
 }

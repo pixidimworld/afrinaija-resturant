@@ -17,28 +17,17 @@
   </head>
   <body>
     <main class="menu-page" aria-labelledby="menu-page-title">
-      <div class="menu-page-entrance" aria-hidden="true"><span>Afrinaija Pot</span></div>
-      <img class="menu-spice menu-spice-one" src="/assets/images/spice2.png" decoding="async" fetchpriority="low" alt="" aria-hidden="true" />
       <header class="menu-page-header">
         <a class="menu-page-brand" href="/#home">Afrinaija Pot</a>
         <a class="menu-page-close" href="/#home" aria-label="Return to Afrinaija Pot home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 6l20 20M26 6L6 26" /></svg></a>
       </header>
-      <p class="menu-page-kicker">Rice &amp; Meats</p>
-      <div class="menu-meal-stage">
-        <h1 class="menu-meal-title" id="menu-page-title">Jollof Rice</h1>
-        <div class="menu-meal-image-stage"><img class="menu-meal-image" src="/assets/images/main-dish.png" decoding="async" fetchpriority="high" alt="Jollof Rice at Afrinaija Pot" /></div>
-      </div>
-      <button class="menu-meal-arrow menu-meal-previous" type="button" aria-label="Previous meal"><svg viewBox="0 0 28 20" aria-hidden="true"><path d="M26 10H3M10 3l-7 7 7 7" /></svg></button>
-      <button class="menu-meal-arrow menu-meal-next" type="button" aria-label="Next meal"><svg viewBox="0 0 28 20" aria-hidden="true"><path d="M2 10h23M18 3l7 7-7 7" /></svg></button>
-      <div class="menu-meal-meta"><p class="menu-meal-price">RWF 12,000</p><button class="menu-order-button" type="button">Order</button></div>
-      <div class="menu-meal-description" aria-live="polite">
-        <h2 class="menu-meal-detail-name">Jollof Rice</h2>
-        <p class="menu-meal-detail-copy">Smoky Nigerian jollof rice served with a carefully prepared protein.</p>
-      </div>
-      <p class="menu-meal-count" aria-live="polite">01 / 11</p>
-      <div class="menu-category-card" aria-hidden="true">
-        <p>Menu categories</p>
-        <div class="menu-category-list">
+      <section class="menu-catalogue">
+        <div class="menu-catalogue-heading">
+          <p>Explore our kitchen</p>
+          <h1 id="menu-page-title">Our Menu</h1>
+        </div>
+        <nav class="menu-category-strip" aria-label="Menu categories">
+          <div class="menu-category-list">
           <button type="button" data-category="Rice &amp; Meats" aria-current="true">Rice &amp; Meats</button>
           <button type="button" data-category="Breakfast">Breakfast</button>
           <button type="button" data-category="Porridge">Porridge</button>
@@ -54,14 +43,31 @@
           <button type="button" data-category="Grills">Grills</button>
           <button type="button" data-category="Pepper Soup">Pepper Soup</button>
           <button type="button" data-category="Special Order">Special Order</button>
+          </div>
+        </nav>
+        <div class="menu-category-summary">
+          <h2 class="menu-active-category">Rice &amp; Meats</h2>
+          <p class="menu-item-count" aria-live="polite">11 dishes</p>
         </div>
-      </div>
-      <button class="menu-category-toggle" type="button" aria-label="Open meal categories" aria-expanded="false"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 20l9-9 9 9" /></svg></button>
+        <div class="menu-food-grid" aria-live="polite"></div>
+      </section>
+
+      <button class="menu-order-button menu-order-proxy" type="button" tabindex="-1" aria-hidden="true">Add to order</button>
 
       <button class="my-order-floating" type="button" aria-label="Open My Order">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 11h14l-1 15H10L9 11zM12 11V8a4 4 0 018 0v3" /></svg>
         <span class="my-order-badge" aria-label="0 selected items" hidden>0</span>
       </button>
+
+      <div class="menu-scroll-controls" aria-hidden="true">
+        <button class="menu-scroll-cart" type="button" aria-label="Open My Order">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 11h14l-1 15H10L9 11zM12 11V8a4 4 0 018 0v3" /></svg>
+          <span class="menu-scroll-order-badge" aria-label="0 selected items" hidden>0</span>
+        </button>
+        <a class="menu-scroll-exit" href="/#home" aria-label="Return to Afrinaija Pot home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 6l20 20M26 6L6 26" /></svg>
+        </a>
+      </div>
 
       <div class="order-confirmation-overlay" aria-hidden="true">
         <button class="order-dialog-backdrop" type="button" data-close-confirmation aria-label="Close confirmation"></button>
@@ -101,7 +107,5 @@
     <script type="module" src="/src/menu.js"></script>
   </body>
 </html>
-
-
 
 

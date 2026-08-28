@@ -11,8 +11,8 @@ button { user-select: none; }
 .menu-page::after { content: ''; position: absolute; z-index: 0; pointer-events: none; background-repeat: no-repeat; background-position: center; background-size: contain; }
 .menu-page::before { top: -19%; left: -9%; width: clamp(260px, 32vw, 540px); aspect-ratio: 1; background-image: url('/assets/images/palm.png'); opacity: .2; transform: rotate(8deg); }
 .menu-page::after { right: -6%; bottom: -17%; width: clamp(220px, 28vw, 450px); aspect-ratio: 1; background-image: url('/assets/images/leaf.png'); opacity: .13; transform: rotate(-28deg); filter: blur(.2px); }
-.menu-spice { position: absolute; z-index: 0; display: block; width: clamp(145px, 17vw, 260px); height: auto; opacity: .8; pointer-events: none; user-select: none; mix-blend-mode: multiply; filter: saturate(.9) drop-shadow(0 18px 24px rgb(28 57 29 / .08)); }
-.menu-spice-one { top: 8%; right: -3.5%; transform: rotate(18deg); }
+.menu-spice { position: absolute; z-index: 0; display: block; width: clamp(145px, 17vw, 260px); height: auto; opacity: .6; pointer-events: none; user-select: none; mix-blend-mode: multiply; filter: saturate(.9) drop-shadow(0 18px 24px rgb(28 57 29 / .08)); }
+.menu-spice-one { top: auto; left: 50%; bottom: -8%; width: min(78%, 460px); transform: translate(-50%, 32%) rotate(-4deg); }
 .menu-page-header { position: absolute; z-index: 8; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 28px clamp(24px, 4vw, 58px); }
 .menu-page-brand { color: var(--green-950); font: 800 clamp(21px, 2vw, 29px)/1 'League Spartan', sans-serif; text-decoration: none; }
 .menu-page-close { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid #cbd6cb; border-radius: 50%; color: var(--green-950); background: #fff; cursor: pointer; }
@@ -22,7 +22,8 @@ button { user-select: none; }
 .menu-meal-title { position: absolute; z-index: 0; width: 94%; margin: 0; color: rgb(11 77 43 / .095); font: 800 clamp(92px, 14vw, 220px)/.78 'League Spartan', sans-serif; letter-spacing: -.065em; text-align: center; text-transform: uppercase; }
 .menu-meal-image-stage { position: relative; z-index: 2; display: grid; place-items: center; width: min(47vw, 650px); aspect-ratio: 1; }
 .menu-meal-image-stage::after { content: ''; position: absolute; z-index: -1; width: 72%; height: 17%; bottom: 9%; border-radius: 50%; background: rgb(10 37 17 / .16); filter: blur(22px); }
-.menu-meal-image-stage.is-empty::after { opacity: 0; }
+.menu-meal-image-stage.is-empty::after,
+.menu-meal-image-stage.is-empty .menu-spice-one { opacity: 0; }
 .menu-meal-image { display: block; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 24px 20px rgb(9 40 16 / .18)); }
 .menu-meal-image[hidden] { display: none; }
 .menu-meal-arrow { position: absolute; z-index: 6; top: 50%; display: grid; place-items: center; width: 56px; height: 56px; padding: 0; border: 1px solid #b8c8ba; border-radius: 50%; color: var(--green-950); background: rgb(255 255 255 / .86); cursor: pointer; transform: translateY(-50%); transition: color .2s ease, background .2s ease, transform .2s ease; }
@@ -74,8 +75,8 @@ button { user-select: none; }
   .menu-page { position: relative; width: 100%; height: 100svh; min-height: 620px; overflow: hidden; color: #101610; background: #fbfcf8; isolation: isolate; }
   .menu-page::before { top: -8%; left: -28%; width: 300px; opacity: .16; }
   .menu-page::after { right: -24%; bottom: -7%; width: 270px; opacity: .1; }
-  .menu-spice { width: clamp(118px, 37vw, 165px); opacity: .8; }
-  .menu-spice-one { top: 10%; right: -15%; }
+  .menu-spice { width: clamp(118px, 37vw, 165px); opacity: .6; }
+  .menu-spice-one { width: min(85%, 300px); transform: translate(-50%, 28%) rotate(-4deg); }
   .menu-page-header { padding: 22px 20px; }
   .menu-page-close { width: 44px; height: 44px; }
   .menu-page-kicker { top: 84px; width: 100%; text-align: center; }
@@ -176,3 +177,942 @@ button { user-select: none; }
 }
 
 @media (prefers-reduced-motion: reduce) { .menu-page-entrance { display: none; } }
+
+/* Browsable menu catalogue */
+html,
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body {
+  background: #f7f8f3;
+}
+
+.menu-page {
+  width: 100%;
+  height: auto;
+  min-height: 100svh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgb(255 255 255 / .96), transparent 48%),
+    #f7f8f3;
+}
+
+.menu-page::before {
+  position: fixed;
+  top: -18%;
+  left: -9%;
+  opacity: .16;
+}
+
+.menu-page::after {
+  position: fixed;
+  right: -7%;
+  bottom: -18%;
+  opacity: .11;
+}
+
+.menu-page-header {
+  position: relative;
+  min-height: 104px;
+}
+
+.menu-catalogue {
+  position: relative;
+  z-index: 1;
+  width: min(1440px, 100%);
+  min-height: calc(100svh - 104px);
+  margin: 0 auto;
+  padding: 4px clamp(24px, 4vw, 58px) 80px;
+}
+
+.menu-catalogue::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 42px;
+  right: -90px;
+  width: clamp(190px, 20vw, 320px);
+  aspect-ratio: 1;
+  background: url('/assets/images/spice2.png') center / contain no-repeat;
+  opacity: .18;
+  pointer-events: none;
+}
+
+.menu-catalogue-heading {
+  margin-bottom: 24px;
+}
+
+.menu-catalogue-heading p {
+  margin: 0 0 7px;
+  color: #6d786e;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.menu-catalogue-heading h1 {
+  margin: 0;
+  color: var(--green-950);
+  font: 800 clamp(48px, 6vw, 82px)/.86 'League Spartan', sans-serif;
+  letter-spacing: -.05em;
+}
+
+.menu-category-strip {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 2px 12px;
+  cursor: grab;
+  scrollbar-width: none;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-inline: contain;
+}
+
+.menu-category-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-category-strip:active {
+  cursor: grabbing;
+}
+
+.menu-category-list {
+  display: flex;
+  width: max-content;
+  max-height: none;
+  gap: 9px;
+  overflow: visible;
+}
+
+.menu-category-list button {
+  flex: 0 0 auto;
+  width: auto;
+  min-height: 41px;
+  padding: 10px 18px;
+  border: 1px solid #d9e0d7;
+  border-radius: 999px;
+  color: #263028;
+  background: rgb(255 255 255 / .88);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: 0 4px 14px rgb(16 49 25 / .035);
+  transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.menu-category-list button:hover {
+  color: var(--green-950);
+  border-color: #aebfaf;
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+.menu-category-list button[aria-current='true'] {
+  color: #fff;
+  border-color: var(--green-950);
+  background: var(--green-950);
+  box-shadow: 0 7px 18px rgb(11 77 43 / .15);
+  transform: none;
+}
+
+.menu-category-summary {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 25px 0 20px;
+}
+
+.menu-active-category {
+  margin: 0;
+  color: #162219;
+  font: 800 clamp(28px, 3vw, 42px)/.95 'League Spartan', sans-serif;
+  letter-spacing: -.025em;
+}
+
+.menu-item-count {
+  margin: 0;
+  color: #708074;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.menu-food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(18px, 2vw, 28px);
+}
+
+.menu-food-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgb(11 77 43 / .1);
+  border-radius: 30px;
+  background: #fffefa;
+  box-shadow: 0 10px 30px rgb(24 49 29 / .07);
+  transform-origin: 50% 60%;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.menu-food-card:hover {
+  border-color: rgb(11 77 43 / .18);
+  box-shadow: 0 17px 36px rgb(24 49 29 / .11);
+  transform: translateY(-4px);
+}
+
+.menu-food-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1 / .9;
+  overflow: hidden;
+  border-radius: 28px 28px 26px 26px;
+  background: #dbe6ca;
+}
+
+.menu-food-media::after {
+  content: '';
+  position: absolute;
+  inset: auto 16% 7% 16%;
+  height: 10%;
+  border-radius: 50%;
+  background: rgb(16 54 27 / .13);
+  filter: blur(13px);
+}
+
+.menu-food-media.is-empty {
+  background: #edf1e7;
+}
+
+.menu-food-media.is-empty::after {
+  display: none;
+}
+
+.menu-food-image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 96%;
+  height: 96%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.menu-food-price {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  max-width: 56%;
+  margin: 0;
+  padding: 11px 14px 10px;
+  border-radius: 0 27px 0 15px;
+  color: #18201a;
+  background: #fffefa;
+  font-size: clamp(10px, .95vw, 13px);
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.menu-food-information {
+  display: grid;
+  gap: 15px;
+  padding: 17px 18px 18px;
+}
+
+.menu-food-name-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px;
+}
+
+.menu-food-name-row h3 {
+  min-width: 0;
+  margin: 0;
+  color: #162019;
+  font: 800 clamp(18px, 1.7vw, 25px)/.96 'League Spartan', sans-serif;
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+}
+
+.menu-card-order {
+  padding: 2px 0 4px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  color: var(--green-950);
+  background: transparent;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .055em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color .18s ease, transform .18s ease;
+}
+
+.menu-card-order:hover {
+  color: #187044;
+  transform: translateX(2px);
+}
+
+.menu-food-details {
+  display: flex;
+  min-width: 0;
+  gap: 6px;
+}
+
+.menu-food-details span {
+  max-width: 100%;
+  overflow: hidden;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #49614e;
+  background: #e9f0e2;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu-order-proxy {
+  display: none;
+}
+
+.menu-card-order:focus-visible,
+.menu-category-list button:focus-visible {
+  outline: 3px solid #74b96f;
+  outline-offset: 3px;
+}
+
+@media (max-width: 1100px) {
+  .menu-food-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .menu-page::before {
+    top: -7%;
+    left: -30%;
+    opacity: .12;
+  }
+
+  .menu-page::after {
+    right: -27%;
+    bottom: -7%;
+    opacity: .08;
+  }
+
+  .menu-page-header {
+    min-height: 88px;
+  }
+
+  .menu-catalogue {
+    min-height: calc(100svh - 88px);
+    padding: 4px 10px 54px;
+  }
+
+  .menu-catalogue::before {
+    top: 24px;
+    right: -92px;
+    width: 190px;
+    opacity: .12;
+  }
+
+  .menu-catalogue-heading {
+    padding: 0 8px;
+    margin-bottom: 17px;
+  }
+
+  .menu-catalogue-heading h1 {
+    font-size: clamp(42px, 14vw, 62px);
+  }
+
+  .menu-category-strip {
+    padding: 3px 8px 10px;
+  }
+
+  .menu-category-list {
+    gap: 7px;
+  }
+
+  .menu-category-list button {
+    min-height: 36px;
+    padding: 9px 14px;
+    font-size: 10px;
+  }
+
+  .menu-category-summary {
+    align-items: center;
+    margin: 19px 8px 14px;
+  }
+
+  .menu-active-category {
+    font-size: clamp(24px, 8vw, 34px);
+  }
+
+  .menu-item-count {
+    font-size: 8px;
+  }
+
+  .menu-food-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .menu-food-card {
+    border-radius: 17px;
+    box-shadow: 0 5px 16px rgb(24 49 29 / .065);
+  }
+
+  .menu-food-card:hover {
+    transform: none;
+  }
+
+  .menu-food-media {
+    aspect-ratio: 1 / .94;
+    border-radius: 16px 16px 15px 15px;
+  }
+
+  .menu-food-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .menu-food-price {
+    max-width: 78%;
+    padding: 7px 7px 6px;
+    border-radius: 0 16px 0 9px;
+    font-size: clamp(7px, 2.1vw, 9px);
+  }
+
+  .menu-food-information {
+    gap: 9px;
+    padding: 9px 7px 10px;
+  }
+
+  .menu-food-name-row {
+    gap: 4px;
+  }
+
+  .menu-food-name-row h3 {
+    font-size: clamp(10px, 3.2vw, 14px);
+    line-height: 1;
+  }
+
+  .menu-card-order {
+    width: min-content;
+    max-width: 39px;
+    padding-top: 1px;
+    font-size: clamp(5.8px, 1.65vw, 7px);
+    line-height: 1.15;
+    white-space: normal;
+  }
+
+  .menu-food-details span {
+    padding: 4px 6px;
+    font-size: clamp(5.8px, 1.7vw, 7px);
+  }
+
+  .my-order-floating {
+    position: absolute;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-food-card,
+  .menu-category-list button,
+  .menu-card-order {
+    transition: none;
+  }
+}
+
+.menu-scroll-controls {
+  position: fixed;
+  z-index: 18;
+  right: clamp(16px, 2.5vw, 30px);
+  bottom: max(18px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px) scale(.92);
+  transform-origin: 100% 100%;
+  transition: opacity .2s ease, transform .24s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .24s;
+}
+
+.menu-scroll-controls.is-visible {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition-delay: 0s;
+}
+
+.menu-scroll-cart,
+.menu-scroll-exit {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid #cbd6cb;
+  border-radius: 50%;
+  color: var(--green-950);
+  background: rgb(255 255 255 / .96);
+  box-shadow: 0 10px 24px rgb(11 77 43 / .14);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.menu-scroll-cart:hover,
+.menu-scroll-exit:hover {
+  color: #fff;
+  background: var(--green-950);
+  transform: translateY(-2px);
+}
+
+.menu-scroll-cart svg,
+.menu-scroll-exit svg {
+  width: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.menu-scroll-order-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--green-950);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 16px;
+  text-align: center;
+}
+
+.menu-scroll-order-badge[hidden] {
+  display: none;
+}
+
+.menu-scroll-cart:focus-visible,
+.menu-scroll-exit:focus-visible {
+  outline: 3px solid #74b96f;
+  outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+  .menu-scroll-controls {
+    right: 13px;
+    bottom: max(13px, env(safe-area-inset-bottom));
+    gap: 7px;
+  }
+
+  .menu-scroll-cart,
+  .menu-scroll-exit {
+    width: 43px;
+    height: 43px;
+  }
+
+  .menu-scroll-cart svg,
+  .menu-scroll-exit svg {
+    width: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-scroll-controls,
+  .menu-scroll-cart,
+  .menu-scroll-exit {
+    transition: none;
+  }
+}
+
+/* Drinks-only editorial showcase */
+.menu-food-grid.is-drinks-showcase {
+  display: block;
+}
+
+.drinks-showcase {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  padding: 30px 34px 22px;
+  border: 1px solid rgb(11 77 43 / .1);
+  border-radius: 38px;
+  background: rgb(255 254 250 / .94);
+  box-shadow: 0 14px 38px rgb(24 49 29 / .075);
+}
+
+.drinks-showcase-main {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(210px, .78fr) minmax(350px, 1.32fr) minmax(190px, .68fr);
+  align-items: center;
+  min-height: 500px;
+}
+
+.drinks-showcase-copy {
+  position: relative;
+  z-index: 3;
+  align-self: start;
+  max-width: 300px;
+  padding: 54px 0 0 10px;
+}
+
+.drinks-showcase-eyebrow {
+  margin: 0 0 13px;
+  color: #627166;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.drinks-showcase-name {
+  margin: 0;
+  color: var(--green-950);
+  font: 800 clamp(42px, 4.6vw, 72px)/.86 'League Spartan', sans-serif;
+  letter-spacing: -.045em;
+  overflow-wrap: anywhere;
+}
+
+.drinks-showcase-description {
+  max-width: 260px;
+  margin: 19px 0 0;
+  color: #526057;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.drinks-showcase-product {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 500px;
+}
+
+.drinks-showcase-product::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 7% -3% 2%;
+  border-radius: 74px 74px 56px 56px;
+  background:
+    radial-gradient(circle at 28% 18%, rgb(255 255 255 / .66), transparent 36%),
+    #cfe0bd;
+}
+
+.drinks-showcase-product.is-empty::before {
+  background: #edf1e7;
+}
+
+.drinks-showcase-arrow {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgb(11 77 43 / .18);
+  border-radius: 50%;
+  color: #0b4d2b;
+  background: rgb(255 255 255 / .94);
+  box-shadow: 0 9px 24px rgb(8 55 30 / .12);
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.drinks-showcase-arrow svg {
+  width: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.drinks-showcase-previous {
+  left: clamp(8px, 2vw, 22px);
+}
+
+.drinks-showcase-next {
+  right: clamp(8px, 2vw, 22px);
+}
+
+.drinks-showcase-arrow:hover {
+  color: #fff;
+  background: #0b4d2b;
+  box-shadow: 0 11px 27px rgb(8 55 30 / .2);
+}
+
+.drinks-showcase-arrow:focus-visible {
+  outline: 3px solid rgb(11 77 43 / .22);
+  outline-offset: 3px;
+}
+
+.drinks-showcase-image {
+  display: block;
+  width: 92%;
+  height: 470px;
+  max-height: calc(100% - 20px);
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 24px 22px rgb(11 47 22 / .16));
+  transform-origin: 50% 60%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.drinks-showcase-image[hidden] {
+  display: none;
+}
+
+.drinks-showcase-meta {
+  position: relative;
+  z-index: 3;
+  align-self: end;
+  display: grid;
+  justify-items: start;
+  gap: 15px;
+  padding: 0 0 62px 24px;
+}
+
+.drinks-showcase-price {
+  margin: 0;
+  color: var(--green-950);
+  font: 800 clamp(24px, 2.4vw, 34px)/1 'League Spartan', sans-serif;
+}
+
+.drinks-showcase-order {
+  min-height: 45px;
+  padding: 11px 19px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--green-950);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 10px 22px rgb(11 77 43 / .16);
+  cursor: pointer;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.drinks-showcase-order:hover {
+  background: #07391f;
+  transform: translateY(-2px);
+}
+
+.drinks-showcase-selector {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 34px);
+  width: 100%;
+  overflow-x: auto;
+  padding: 17px 8px 5px;
+  border-top: 1px solid #e2e8df;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-inline: contain;
+}
+
+.drinks-showcase-selector::-webkit-scrollbar {
+  display: none;
+}
+
+.drinks-showcase-option {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 7px 0 10px;
+  border: 0;
+  color: #818b83;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  scroll-snap-align: center;
+  cursor: pointer;
+  transition: color .18s ease;
+}
+
+.drinks-showcase-option::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--green-950);
+  opacity: 0;
+  transform: scaleX(.35);
+  transition: opacity .18s ease, transform .2s ease;
+}
+
+.drinks-showcase-option:hover,
+.drinks-showcase-option[aria-selected='true'] {
+  color: var(--green-950);
+}
+
+.drinks-showcase-option[aria-selected='true']::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.drinks-showcase-order:focus-visible,
+.drinks-showcase-option:focus-visible {
+  outline: 3px solid #74b96f;
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .drinks-showcase-main {
+    grid-template-columns: minmax(170px, .72fr) minmax(300px, 1.2fr) minmax(160px, .6fr);
+  }
+
+  .drinks-showcase-name {
+    font-size: clamp(38px, 6vw, 56px);
+  }
+}
+
+@media (max-width: 700px) {
+  .drinks-showcase {
+    min-height: 660px;
+    padding: 21px 13px 15px;
+    border-radius: 25px;
+  }
+
+  .drinks-showcase-main {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(350px, 1fr) auto;
+    min-height: 565px;
+  }
+
+  .drinks-showcase-copy {
+    width: 82%;
+    max-width: none;
+    padding: 8px 9px 0;
+  }
+
+  .drinks-showcase-eyebrow {
+    margin-bottom: 9px;
+    font-size: 7px;
+  }
+
+  .drinks-showcase-name {
+    font-size: clamp(34px, 11vw, 46px);
+  }
+
+  .drinks-showcase-description {
+    max-width: 230px;
+    margin-top: 11px;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .drinks-showcase-product {
+    height: 385px;
+    margin-top: -8px;
+  }
+
+  .drinks-showcase-product::before {
+    inset: 11% 3% 1%;
+    border-radius: 44px 44px 36px 36px;
+  }
+
+  .drinks-showcase-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .drinks-showcase-arrow svg {
+    width: 19px;
+  }
+
+  .drinks-showcase-previous {
+    left: 7px;
+  }
+
+  .drinks-showcase-next {
+    right: 7px;
+  }
+
+  .drinks-showcase-image {
+    width: 94%;
+    height: 350px;
+    max-height: calc(100% - 18px);
+  }
+
+  .drinks-showcase-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 14px;
+    padding: 2px 8px 14px;
+  }
+
+  .drinks-showcase-price {
+    font-size: 23px;
+  }
+
+  .drinks-showcase-order {
+    min-height: 41px;
+    padding: 10px 15px;
+    font-size: 8px;
+  }
+
+  .drinks-showcase-selector {
+    gap: 22px;
+    padding: 14px 9px 5px;
+  }
+
+  .drinks-showcase-option {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drinks-showcase-order,
+  .drinks-showcase-option,
+  .drinks-showcase-option::after {
+    transition: none;
+  }
+}

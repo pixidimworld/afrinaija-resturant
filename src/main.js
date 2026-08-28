@@ -256,45 +256,40 @@ function setupAboutDecorations() {
   observer.observe(section);
 }
 
-function setupStaffCarousel() {
-  const stage = document.querySelector('.staff-carousel');
-  const path = document.querySelector('#staff-arc-path');
-  const cards = [...document.querySelectorAll('.staff-card')];
-  if (!stage || !path || !cards.length) return;
+function setupStaffComposition() {
+  const composition = document.querySelector('.staff-composition');
+  const cards = [...document.querySelectorAll('.staff-card-frame')];
+  const gsap = window.gsap;
+  if (!composition || cards.length !== 3 || !gsap) return;
 
-  const pathLength = path.getTotalLength();
-  const duration = 22000;
-  let startTime;
-  let frameId;
+  if (reduceMotion.matches || !('IntersectionObserver' in window)) {
+    gsap.set(cards, { autoAlpha: 1, scale: 1, y: 0 });
+    return;
+  }
 
-  const placeCards = (progress = 0) => {
-    const scaleX = stage.clientWidth / 1200;
-    const scaleY = stage.clientHeight / 430;
-    cards.forEach((card, index) => {
-      const position = (progress + index / cards.length) % 1;
-      const point = path.getPointAtLength(position * pathLength);
-      card.style.transform = `translate3d(${point.x * scaleX}px, ${point.y * scaleY}px, 0) translate(-50%, -50%)`;
-    });
-  };
-
-  const animate = timestamp => {
-    if (!startTime) startTime = timestamp;
-    placeCards(((timestamp - startTime) % duration) / duration);
-    frameId = requestAnimationFrame(animate);
-  };
-
-  const updateMotion = () => {
-    cancelAnimationFrame(frameId);
-    startTime = undefined;
-    placeCards();
-    if (!reduceMotion.matches) frameId = requestAnimationFrame(animate);
-  };
-
-  reduceMotion.addEventListener('change', updateMotion);
-  window.addEventListener('resize', () => {
-    if (reduceMotion.matches) placeCards();
+  gsap.set(cards, {
+    autoAlpha: 0,
+    scale: .82,
+    y: 30,
+    transformOrigin: '50% 70%',
+    willChange: 'transform, opacity'
   });
-  updateMotion();
+
+  const observer = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    observer.disconnect();
+    gsap.to(cards, {
+      autoAlpha: 1,
+      scale: 1,
+      y: 0,
+      duration: .52,
+      stagger: .15,
+      ease: 'back.out(1.35)',
+      onComplete: () => gsap.set(cards, { clearProps: 'transform,opacity,visibility,willChange' })
+    });
+  }, { threshold: .25 });
+
+  observer.observe(composition);
 }
 const environmentImages = [
   'WhatsApp Image 2026-08-12 at 1.34.19 PM (1).jpeg',
@@ -718,24 +713,26 @@ document.addEventListener('keydown', event => {
   }
 });
 function setupSocialTitle() {
-  const title = document.querySelector('.social-pop-title');
+  const titles = document.querySelectorAll('.social-pop-title, .animated-title');
   const gsap = window.gsap;
-  if (!title || !gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!titles.length || !gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  gsap.set(title, { autoAlpha: 0, scale: .78, y: 28, transformOrigin: '50% 60%' });
-  const observer = new IntersectionObserver(entries => {
-    if (!entries.some(entry => entry.isIntersecting)) return;
-    observer.disconnect();
-    gsap.to(title, {
-      autoAlpha: 1,
-      scale: 1,
-      y: 0,
-      duration: .9,
-      ease: 'back.out(1.55)',
-      clearProps: 'transform,opacity,visibility'
-    });
-  }, { threshold: .3 });
-  observer.observe(title);
+  titles.forEach(title => {
+    gsap.set(title, { autoAlpha: 0, scale: .78, y: 28, transformOrigin: '50% 60%' });
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      observer.disconnect();
+      gsap.to(title, {
+        autoAlpha: 1,
+        scale: 1,
+        y: 0,
+        duration: .9,
+        ease: 'back.out(1.55)',
+        clearProps: 'transform,opacity,visibility'
+      });
+    }, { threshold: .3 });
+    observer.observe(title);
+  });
 }
 function setupFoodShowcaseWhenNear() {
   const root = document.querySelector('.food-showcase');
@@ -796,7 +793,7 @@ const startDeferredFeatures = () => {
     setupTextLoop();
     setupAboutTextReveal();
     setupAboutDecorations();
-    setupStaffCarousel();
+    setupStaffComposition();
     setupExperienceCarousel();
     setupExperienceEntrance();
     setupSocialTitle();
@@ -811,7 +808,6 @@ const startDeferredFeatures = () => {
 window.addEventListener('afrinaija:hero-ready', startDeferredFeatures, { once: true });
 if (reduceMotion.matches || document.documentElement.dataset.heroReady === 'true') startDeferredFeatures();
 window.setTimeout(startDeferredFeatures, 3500);
-
 
 
 

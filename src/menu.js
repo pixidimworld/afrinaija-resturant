@@ -2,238 +2,207 @@ import { setupMyOrder } from './order.js';
 
 const riceAndMeats = [
   { name: 'Jollof Rice', price: 'RWF 12,000', image: '/assets/images/main-dish.png', description: 'Smoky Nigerian jollof rice served with a carefully prepared protein.' },
-  { name: 'Full Package Jollof', price: 'RWF 20,000', image: '', description: 'Our complete jollof experience with generous accompaniments and protein.' },
-  { name: 'White Rice & Stew', price: 'RWF 12,000', image: '', description: 'Steamed white rice paired with a rich, deeply seasoned Nigerian stew.' },
+  { name: 'Full Package Jollof', price: 'RWF 20,000', image: '/assets/menu/fullpackage jollof.png', description: 'Our complete jollof experience with generous accompaniments and protein.' },
+  { name: 'White Rice & Stew', price: 'RWF 12,000', image: '/assets/menu/white rice and stew.png', description: 'Steamed white rice paired with a rich, deeply seasoned Nigerian stew.' },
   { name: 'Fried Rice', price: 'RWF 12,000', image: '/assets/images/dish-rotate-3.png', description: 'Colourful Nigerian fried rice served with a carefully prepared protein.' },
-  { name: 'Full Package Fried Rice', price: 'RWF 20,000', image: '', description: 'A generous fried rice plate completed with accompaniments and protein.' },
-  { name: 'Coconut Rice', price: 'RWF 14,000', image: '', description: 'Fragrant rice cooked with coconut for a rich and comforting finish.' },
-  { name: 'Local Nigerian Rice', price: 'RWF 12,000', image: '', description: 'Traditional Nigerian rice prepared with familiar spices and homestyle flavour.' },
-  { name: 'Ofada Rice & Ofada Sauce', price: 'RWF 18,000', image: '', description: 'Distinctive Ofada rice served with its bold, traditional pepper sauce.' },
-  { name: 'Ofada Sauce & White Rice', price: 'RWF 12,000', image: '', description: 'Steamed white rice accompanied by our rich and aromatic Ofada sauce.' },
-  { name: 'White Rice & Vegetable', price: 'RWF 14,000', image: '', description: 'Steamed white rice served with a flavourful Nigerian vegetable preparation.' },
-  { name: 'Special Fried Rice with Shrimps', price: 'RWF 30,000', image: '', description: 'Our special fried rice finished with seasoned shrimps for a celebratory plate.' }
+  { name: 'Full Package Fried Rice', price: 'RWF 20,000', image: '/assets/menu/full package fried rice.jpg', description: 'A generous fried rice plate completed with accompaniments and protein.' },
+  { name: 'Coconut Rice', price: 'RWF 14,000', image: '/assets/menu/coconut rice.png', description: 'Fragrant rice cooked with coconut for a rich and comforting finish.' },
+  { name: 'Local Nigerian Rice', price: 'RWF 12,000', image: '/assets/menu/local nigerian rice.png', description: 'Traditional Nigerian rice prepared with familiar spices and homestyle flavour.' },
+  { name: 'Ofada Rice & Ofada Sauce', price: 'RWF 18,000', image: '/assets/menu/ofada rice and ofada sauce.png', description: 'Distinctive Ofada rice served with its bold, traditional pepper sauce.' },
+  { name: 'Ofada Sauce & White Rice', price: 'RWF 12,000', image: '/assets/menu/ofada sauce and white rice.png', description: 'Steamed white rice accompanied by our rich and aromatic Ofada sauce.' },
+  { name: 'White Rice & Vegetable', price: 'RWF 14,000', image: '/assets/menu/white rice and vegetables.png', description: 'Steamed white rice served with a flavourful Nigerian vegetable preparation.' },
+  { name: 'Special Fried Rice with Shrimps', price: 'RWF 30,000', image: '/assets/menu/special fried rice with shrimps.png', description: 'Our special fried rice finished with seasoned shrimps for a celebratory plate.' }
 ];
 
-const createMenuItems = (category, items) => items.map(([name, price]) => ({
+const createMenuItems = (category, items) => items.map(([name, price, image = '']) => ({
   name,
   price,
-  image: '',
+  image,
   description: name + ' from our ' + category + ' selection.'
 }));
 
 const menuCategories = {
   'Rice & Meats': riceAndMeats,
   Breakfast: createMenuItems('Breakfast', [
-    ['Chips & Egg', 'RWF 8,500'],
-    ['Indomie, Egg & Plantain', 'RWF 8,500'],
-    ['Special Omelette', 'RWF 8,500'],
-    ['Fried Plantain & Egg', 'RWF 9,500'],
-    ['Akara & Custard', 'RWF 10,000'],
-    ['Moi Moi & Custard', 'RWF 10,000'],
-    ['Jollof Spaghetti', 'RWF 9,500'],
-    ['Jollof Macaroni', 'RWF 9,500']
+    ['Chips & Egg', 'RWF 8,500', '/assets/menu/chips and eggs.png'],
+    ['Indomie, Egg & Plantain', 'RWF 8,500', '/assets/menu/indomie eggs plantain.png'],
+    ['Special Omelette', 'RWF 8,500', '/assets/menu/special omelette.png'],
+    ['Fried Plantain & Egg', 'RWF 9,500', '/assets/menu/freid plantain and egg.png'],
+    ['Akara & Custard', 'RWF 10,000', '/assets/menu/akara and custard.png'],
+    ['Moi Moi & Custard', 'RWF 10,000', '/assets/menu/moi moi and custard.png'],
+    ['Jollof Spaghetti', 'RWF 9,500', '/assets/menu/jollof spaghetti.png?v=20260828-1'],
+    ['Jollof Macaroni', 'RWF 9,500', '/assets/menu/jollof macroni.png']
   ]),
   Porridge: createMenuItems('Porridge', [
-    ['Rwandan Beans', 'RWF 9,000'],
-    ['Nigerian Beans', 'RWF 13,000'],
-    ['Sweet Potatoes', 'RWF 10,000'],
-    ['Irish Potato', 'RWF 10,000'],
-    ['Yam', 'RWF 15,000'],
-    ['Ripe Plantain', 'RWF 10,000'],
-    ['Unripe Plantain', 'RWF 10,000']
+    ['Rwandan Beans', 'RWF 9,000', '/assets/menu/rwanda beans.png'],
+    ['Nigerian Beans', 'RWF 13,000', '/assets/menu/nigerian beans.png'],
+    ['Sweet Potatoes', 'RWF 10,000', '/assets/menu/sweet potates.png'],
+    ['Irish Potato', 'RWF 10,000', '/assets/menu/irish pototates.png'],
+    ['Yam', 'RWF 15,000', '/assets/menu/yam.png'],
+    ['Ripe Plantain', 'RWF 10,000', '/assets/menu/ripe plantain.png'],
+    ['Unripe Plantain', 'RWF 10,000', '/assets/menu/unripe plantain.png']
   ]),
   Soups: createMenuItems('Soups', [
-    ['Egusi', 'RWF 6,000'],
-    ['Vegetable', 'RWF 6,000'],
-    ['Efo Riro', 'RWF 6,000'],
-    ['Okra', 'RWF 6,000'],
-    ['Ogbono', 'RWF 7,000'],
-    ['Bitter Leaf', 'RWF 7,000'],
-    ['Banga', 'RWF 7,000'],
-    ['Afang', 'RWF 8,000'],
-    ['Fisherman', 'RWF 10,000'],
-    ['White Soup', 'RWF 7,000'],
-    ['Oha', 'RWF 7,500'],
-    ['Ewedu', 'RWF 6,000'],
-    ['Gbegiri', 'RWF 7,000'],
-    ['Egusi Bitter Leaf', 'RWF 7,000'],
-    ['Groundnuts', 'RWF 6,500']
+    ['Egusi', 'RWF 6,000', '/assets/menu/egusi.png'],
+    ['Vegetable', 'RWF 6,000', '/assets/menu/vegetables.png'],
+    ['Efo Riro', 'RWF 6,000', '/assets/menu/Efo Riro.jpg'],
+    ['Okra', 'RWF 6,000', '/assets/menu/Okra.jpg'],
+    ['Ogbono', 'RWF 7,000', '/assets/menu/ogbono.png'],
+    ['Bitter Leaf', 'RWF 7,000', '/assets/menu/bitter leaf.png'],
+    ['Banga', 'RWF 7,000', '/assets/menu/Banga.jpg'],
+    ['Afang', 'RWF 8,000', '/assets/menu/Afang.jpg'],
+    ['Fisherman', 'RWF 10,000', '/assets/menu/fisherman.png'],
+    ['White Soup', 'RWF 7,000', '/assets/menu/White Soup.jpg'],
+    ['Oha', 'RWF 7,500', '/assets/menu/Oha.jpg'],
+    ['Ewedu', 'RWF 6,000', '/assets/menu/Ewedu.png'],
+    ['Gbegiri', 'RWF 7,000', '/assets/menu/Gbegiri.jpg'],
+    ['Egusi Bitter Leaf', 'RWF 7,000', '/assets/menu/Egusi Bitter Leaf.jpg'],
+    ['Groundnuts', 'RWF 6,500', '/assets/menu/Groundnuts.png']
   ]),
   Proteins: createMenuItems('Proteins', [
-    ['Goat', 'RWF 5,000'],
-    ['Chicken', 'RWF 4,000'],
-    ['Tilapia Fish', 'RWF 5,000'],
-    ['Titus Fish', 'RWF 5,000'],
-    ['Beef', 'RWF 4,000'],
-    ['Cow Leg', 'RWF 5,000'],
-    ['Assorted Meats', 'RWF 4,000'],
-    ['Dry Fish', 'RWF 5,000'],
-    ['Turkey', 'RWF 6,000']
+    ['Goat', 'RWF 5,000', '/assets/menu/goat.png'],
+    ['Chicken', 'RWF 4,000', '/assets/menu/chicken.png'],
+    ['Tilapia Fish', 'RWF 5,000', '/assets/menu/tilapia fish.png'],
+    ['Titus Fish', 'RWF 5,000', '/assets/menu/titus fish.png?v=20260823-2'],
+    ['Beef', 'RWF 4,000', '/assets/menu/beef.png'],
+    ['Cow Leg', 'RWF 5,000', '/assets/menu/cow leg.png'],
+    ['Assorted Meats', 'RWF 4,000', '/assets/menu/assorted meat.png'],
+    ['Dry Fish', 'RWF 5,000', '/assets/menu/dry fish.png'],
+    ['Turkey', 'RWF 6,000', '/assets/menu/turkey.png?v=20260823-2']
   ]),
   Swallow: createMenuItems('Swallow', [
-    ['Pando', 'RWF 5,000'],
-    ['Amala', 'RWF 4,000'],
-    ['Fufu', 'RWF 3,000'],
-    ['Semo', 'RWF 3,000'],
-    ['Garri', 'RWF 4,000'],
-    ['Wheat', 'RWF 3,000'],
-    ['Oatmeal', 'RWF 5,000'],
-    ['Plantain Flour', 'RWF 4,000'],
-    ['Tuwo Shinkefa', 'RWF 3,000']
+    ['Pando', 'RWF 5,000', '/assets/menu/pando.png'],
+    ['Amala', 'RWF 4,000', '/assets/menu/amala.png'],
+    ['Fufu', 'RWF 3,000', '/assets/menu/fufu.png'],
+    ['Semo', 'RWF 3,000', '/assets/menu/semo.png'],
+    ['Garri', 'RWF 4,000', '/assets/menu/garri.png'],
+    ['Wheat', 'RWF 3,000', '/assets/menu/wheat.png'],
+    ['Oatmeal', 'RWF 5,000', '/assets/menu/oatmeal.png'],
+    ['Plantain Flour', 'RWF 4,000', '/assets/menu/plantain flour.jpg'],
+    ['Tuwo Shinkefa', 'RWF 3,000', '/assets/menu/Tuwo Shinkefa.png']
   ]),
   'Vegetarian Foods': createMenuItems('Vegetarian Foods', [
-    ['Vegetable Sauce & Rice', 'RWF 12,000'],
-    ['Jollof & Vegetable', 'RWF 12,000'],
-    ['Special Salad', 'RWF 10,000'],
-    ['Spaghetti & Vegetables', 'RWF 12,000'],
-    ['Macaroni & Vegetables', 'RWF 12,000'],
-    ['Fried Rice', 'RWF 12,000'],
-    ['Coconut Rice', 'RWF 12,000'],
-    ['Veggies Noodles', 'RWF 8,500'],
-    ['Spinach & Rice', 'RWF 12,000']
+    ['Vegetable Sauce & Rice', 'RWF 12,000', '/assets/menu/Vegetable Sauce & Rice.png'],
+    ['Jollof & Vegetable', 'RWF 12,000', '/assets/menu/Jollof & Vegetable.jpg'],
+    ['Special Salad', 'RWF 10,000', '/assets/menu/Special Salad.jpg'],
+    ['Spaghetti & Vegetables', 'RWF 12,000', '/assets/menu/Spaghetti & Vegetables.jpg'],
+    ['Macaroni & Vegetables', 'RWF 12,000', '/assets/menu/Macaroni & Vegetables.jpg'],
+    ['Fried Rice', 'RWF 12,000', '/assets/menu/Fried Rice.jpg'],
+    ['Coconut Rice', 'RWF 12,000', '/assets/menu/coconut rice.png'],
+    ['Veggies Noodles', 'RWF 8,500', '/assets/menu/Veggies Noodles.png'],
+    ['Spinach & Rice', 'RWF 12,000', '/assets/menu/spinach rice.png']
   ]),
   Shawarma: createMenuItems('Shawarma', [
-    ['Chicken Shawarma', 'RWF 5,000'],
-    ['Beef Shawarma', 'RWF 5,000'],
-    ['Shawarma with Sausage', 'RWF 7,000'],
-    ['Chicken Brochettes', 'RWF 5,000'],
-    ['Beef Brochettes', 'RWF 5,000'],
-    ['Fisherman Brochettes', 'RWF 6,000']
+    ['Chicken Shawarma', 'RWF 5,000', '/assets/menu/Chicken Shawarma.jpg'],
+    ['Beef Shawarma', 'RWF 5,000', '/assets/menu/Beef Shawarma.jpg'],
+    ['Shawarma with Sausage', 'RWF 7,000', '/assets/menu/Shawarma with Sausage.png'],
+    ['Chicken Brochettes', 'RWF 5,000', '/assets/menu/Chicken Brochettes.jpg'],
+    ['Beef Brochettes', 'RWF 5,000', '/assets/menu/Beef Brochettes.jpg'],
+    ['Fisherman Brochettes', 'RWF 6,000', '/assets/menu/Fisherman Brochettes.jpg']
   ]),
   'Food in Liters': createMenuItems('Food in Liters', [
-    ['1 Liter', 'RWF 20,000'],
-    ['2 Liters', 'RWF 40,000'],
-    ['3 Liters', 'RWF 60,000'],
-    ['4 Liters', 'RWF 80,000'],
-    ['5 Liters', 'RWF 100,000']
+    ['1 Liter', 'RWF 20,000', '/assets/menu/1 liter.jpg'],
+    ['2 Liters', 'RWF 40,000', '/assets/menu/2 liter.jpeg'],
+    ['3 Liters', 'RWF 60,000', '/assets/menu/3 liter.jpeg'],
+    ['4 Liters', 'RWF 80,000', '/assets/menu/4 liter.jpeg'],
+    ['5 Liters', 'RWF 100,000', '/assets/menu/5 liter.jpeg']
   ]),
   'Rwandan Specials': createMenuItems('Rwandan Specials', [
-    ['Matoke & Beef', 'RWF 7,000'],
-    ['Chips & Chicken', 'RWF 8,500'],
-    ['Amachaza Rice & Sauce', 'RWF 9,500'],
-    ['Rice, Chips & Beans MEA', 'RWF 9,000'],
-    ['Macaroni & Vegetables', 'RWF 6,000'],
-    ['Buliu', 'RWF 10,000'],
-    ['Pilau Rice & Meat', 'RWF 9,500'],
-    ['Imvange', 'RWF 9,000'],
-    ['Spinach & Rice Chips', 'RWF 7,500'],
-    ['Isombe Swallow With', 'RWF 8,500']
+    ['Matoke & Beef', 'RWF 7,000', '/assets/menu/Matoke & Beef.jpg'],
+    ['Chips & Chicken', 'RWF 8,500', '/assets/menu/chips and chicken.png'],
+    ['Amachaza Rice & Sauce', 'RWF 9,500', '/assets/menu/Amachaza Rice & Sauce.jpg'],
+    ['Rice, Chips & Beans MEA', 'RWF 9,000', '/assets/menu/Rice, Chips & Beans MEA.png'],
+    ['Macaroni & Vegetables', 'RWF 6,000', '/assets/menu/Macaroni & Vegetables.jpg'],
+    ['Buliu', 'RWF 10,000', '/assets/menu/Buliu.jpg'],
+    ['Pilau Rice & Meat', 'RWF 9,500', '/assets/menu/Pilau Rice & Meat.png'],
+    ['Imvange', 'RWF 9,000', '/assets/menu/Imvange.png'],
+    ['Spinach & Rice Chips', 'RWF 7,500', '/assets/menu/Spinach & Rice Chips.jpg'],
+    ['Isombe Swallow Meat', 'RWF 8,500', '/assets/menu/Isombe Swallow meat.jpg']
   ]),
   'Food Platters': [
     {
       name: 'Pilau Platter',
       price: 'RWF 40,000',
-      image: '',
+      image: '/assets/menu/Pilau Platter.jpg',
       description: 'Pilau, chicken or beef, chips, salad and sauce.'
     },
     {
       name: 'Jollof Platter for Six',
       price: 'RWF 55,000',
-      image: '',
+      image: '/assets/menu/Jollof Platter for Six.jpg',
       description: 'Jollof, chicken or beef or fish, plantain, salad and sauce.'
     },
     {
       name: 'AfriNaija Special Birthday Platter for 10',
       price: 'RWF 300,000',
-      image: '',
+      image: '/assets/menu/AfriNaija Special Birthday Platter for 10.jpg',
       description: 'Bowl of jollof, pilau and fried rice, fried fish and fried chicken, salad, vegetable chips and plantain, sauce, bottle of red or white wine and cake.'
     }
   ],
   Drinks: createMenuItems('Drinks', [
-    ['Soda', 'RWF 1,500'],
-    ['Sparkling Water', 'RWF 1,500'],
-    ['Yange Juice', 'RWF 3,500'],
-    ['Muzig', 'RWF 2,000'],
-    ['Heineken', 'RWF 2,500'],
-    ['Small Water', 'RWF 1,000'],
-    ['Big Water', 'RWF 2,500'],
-    ['Skol', 'RWF 1,500'],
-    ['Guinness', 'RWF 4,000'],
-    ['Savannah', 'RWF 5,000'],
-    ['Black Tea', 'RWF 4,000'],
-    ['Green Tea', 'RWF 4,000'],
-    ['Coffee Black', 'RWF 5,000'],
-    ['Exprso', 'RWF 5,000'],
-    ['Maltona', 'RWF 1,500']
+    ['Soda', 'RWF 1,500', '/assets/menu/soft drink soda.png?v=20260828-1'],
+    ['Sparkling Water', 'RWF 1,500', '/assets/menu/sparkling water.png'],
+    ['Fresh Juice', 'RWF 3,500', '/assets/menu/fresh juice.png'],
+    ['Iyange Juice', 'RWF 4,000', '/assets/menu/iyange juice.png?v=20260828-1'],
+    ['Muzig', 'RWF 2,000', '/assets/menu/mutzig.png'],
+    ['Heineken', 'RWF 2,500', '/assets/menu/heineken.png'],
+    ['Small Water', 'RWF 1,000', '/assets/menu/small water.png'],
+    ['Big Water', 'RWF 2,500', '/assets/menu/big water.png'],
+    ['Skol', 'RWF 1,500', '/assets/menu/skol.png'],
+    ['Guinness', 'RWF 4,000', '/assets/menu/guinness.png'],
+    ['Savannah', 'RWF 5,000', '/assets/menu/savanna.png'],
+    ['Black Tea', 'RWF 4,000', '/assets/menu/black tea.png'],
+    ['Green Tea', 'RWF 4,000', '/assets/menu/greentea.png'],
+    ['Coffee Black', 'RWF 5,000', '/assets/menu/coffee black.png'],
+    ['Exprso', 'RWF 5,000', '/assets/menu/exprso.png'],
+    ['Maltona', 'RWF 1,500', '/assets/menu/maltona.png']
   ]),
   Grills: createMenuItems('Grills', [
-    ['Full Chicken Suya', 'RWF 18,000'],
-    ['Pepper Chicken Medium', 'RWF 18,000'],
-    ['Pepper Chicken Large', 'RWF 30,000'],
-    ['Grilled Goat', 'RWF 20,000'],
-    ['Asun', 'RWF 15,000'],
-    ['Grilled Catfish', 'RWF 25,000'],
-    ['Grilled Tilapia Medium', 'RWF 18,000'],
-    ['Grilled Tilapia Large', 'RWF 30,000'],
-    ['Half Chicken & Chips', 'RWF 15,000'],
-    ['Peppered Beef', 'RWF 14,000'],
-    ['Peppered Goat', 'RWF 18,000'],
-    ['Peppered Pomo', 'RWF 12,000'],
-    ['Beef Suya', 'RWF 13,000']
+    ['Full Chicken Suya', 'RWF 18,000', '/assets/menu/Full Chicken Suya.png'],
+    ['Pepper Chicken Medium', 'RWF 18,000', '/assets/menu/Pepper Chicken Medium.jpg'],
+    ['Pepper Chicken Large', 'RWF 30,000', '/assets/menu/Pepper Chicken Large.jpg'],
+    ['Grilled Goat', 'RWF 20,000', '/assets/menu/Grilled Goat.jpg'],
+    ['Asun', 'RWF 15,000', '/assets/menu/Asun.jpg'],
+    ['Grilled Catfish', 'RWF 25,000', '/assets/menu/Grilled Catfish.jpg'],
+    ['Grilled Tilapia Medium', 'RWF 18,000', '/assets/menu/Grilled Tilapia Medium.jpg'],
+    ['Grilled Tilapia Large', 'RWF 30,000', '/assets/menu/Grilled Tilapia Large.jpg'],
+    ['Half Chicken & Chips', 'RWF 15,000', '/assets/menu/Half Chicken & Chips.jpg'],
+    ['Peppered Beef', 'RWF 14,000', '/assets/menu/Peppered Beef.jpg'],
+    ['Peppered Goat', 'RWF 18,000', '/assets/menu/Peppered Goat.jpg'],
+    ['Peppered Pomo', 'RWF 12,000', '/assets/menu/Peppered Pomo.png'],
+    ['Beef Suya', 'RWF 13,000', '/assets/menu/Beef Suya.jpg']
   ]),
   'Pepper Soup': createMenuItems('Pepper Soup', [
-    ['Full Catfish', 'RWF 18,000'],
-    ['Full Large Catfish', 'RWF 25,000'],
-    ['Tilapia Fish', 'RWF 15,000'],
-    ['Chicken', 'RWF 10,000'],
-    ['Goat', 'RWF 15,000'],
-    ['Beef', 'RWF 10,000'],
-    ['Assorted Cow Meat', 'RWF 10,000'],
-    ['Assorted Goat Meat', 'RWF 12,000']
+    ['Full Catfish', 'RWF 18,000', '/assets/menu/full catfish.jpg'],
+    ['Full Large Catfish', 'RWF 25,000', '/assets/menu/Full Large Catfish.jpg'],
+    ['Tilapia Fish', 'RWF 15,000', '/assets/menu/tilapia fish.png'],
+    ['Chicken', 'RWF 10,000', '/assets/menu/chicken.png'],
+    ['Goat', 'RWF 15,000', '/assets/menu/goat.png'],
+    ['Beef', 'RWF 10,000', '/assets/menu/beef.png'],
+    ['Assorted Cow Meat', 'RWF 10,000', '/assets/menu/Assorted Cow Meat.jpg'],
+    ['Assorted Goat Meat', 'RWF 12,000', '/assets/menu/Assorted Goat Meat.jpg']
   ]),
   'Special Order': createMenuItems('Special Order', [
-    ['Ise Ewu', 'RWF 16,000'],
-    ['Nkwobi', 'RWF 14,000'],
-    ['Abacha', 'RWF 10,000'],
-    ['Waakye', 'RWF 15,000']
+    ['Ise Ewu', 'RWF 16,000', '/assets/menu/Ise Ewu.png'],
+    ['Nkwobi', 'RWF 14,000', '/assets/menu/Nkwobi.png'],
+    ['Abacha', 'RWF 10,000', '/assets/menu/Abacha.png'],
+    ['Waakye', 'RWF 15,000', '/assets/menu/Waakye.jpg']
   ])
 };
 
 function setupMenuPage() {
-  const previous = document.querySelector('.menu-meal-previous');
-  const next = document.querySelector('.menu-meal-next');
-  const title = document.querySelector('.menu-meal-title');
-  const image = document.querySelector('.menu-meal-image');
-  const imageStage = document.querySelector('.menu-meal-image-stage');
-  const price = document.querySelector('.menu-meal-price');
-  const details = document.querySelector('.menu-meal-description');
-  const detailName = document.querySelector('.menu-meal-detail-name');
-  const description = document.querySelector('.menu-meal-detail-copy');
-  const count = document.querySelector('.menu-meal-count');
-  const categoryLabel = document.querySelector('.menu-page-kicker');
-  const categoryToggle = document.querySelector('.menu-category-toggle');
-  const categoryCard = document.querySelector('.menu-category-card');
+  const grid = document.querySelector('.menu-food-grid');
+  const categoryStrip = document.querySelector('.menu-category-strip');
+  const activeCategoryTitle = document.querySelector('.menu-active-category');
+  const itemCount = document.querySelector('.menu-item-count');
+  const orderProxy = document.querySelector('.menu-order-proxy');
   const categoryButtons = [...document.querySelectorAll('[data-category]')];
   const gsap = window.gsap;
-  if (!previous || !next || !title || !image || !imageStage || !price || !details || !detailName || !description || !count || !categoryLabel || !categoryToggle || !categoryCard || !categoryButtons.length || !gsap) return;
+  if (!grid || !categoryStrip || !activeCategoryTitle || !itemCount || !orderProxy || !categoryButtons.length) return;
 
   let activeCategory = 'Rice & Meats';
-  let activeIndex = 0;
-  let transitioning = false;
-  let activeTimeline;
-  const targets = [title, imageStage, price, details, count];
-
-  const finishActiveTransition = () => {
-    if (!transitioning || !activeTimeline) return;
-    const timeline = activeTimeline;
-    activeTimeline = null;
-    transitioning = false;
-    timeline.progress(1);
-    timeline.kill();
-  };
-
-  const createTransition = () => {
-    transitioning = true;
-    activeTimeline = gsap.timeline({
-      onComplete: () => {
-        transitioning = false;
-        activeTimeline = null;
-      }
-    });
-    return activeTimeline;
-  };
-
-  const getMeals = () => menuCategories[activeCategory];
+  let selectedMeal = menuCategories[activeCategory][0];
+  let activeDrinkIndex = 0;
 
   const updateCategoryButtons = () => {
     categoryButtons.forEach(button => {
@@ -241,138 +210,407 @@ function setupMenuPage() {
     });
   };
 
-  const applyMeal = index => {
-    const meals = getMeals();
-    const meal = meals[index];
-    title.textContent = meal.name;
-    price.textContent = meal.price;
-    detailName.textContent = meal.name;
-    description.textContent = meal.description;
-    count.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(meals.length).padStart(2, '0');
-    categoryLabel.textContent = activeCategory;
-    imageStage.dataset.meal = meal.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const createFoodCard = (meal, index) => {
+    const card = document.createElement('article');
+    card.className = 'menu-food-card';
+
+    const media = document.createElement('div');
+    media.className = 'menu-food-media';
     if (meal.image) {
+      const image = document.createElement('img');
+      image.className = 'menu-food-image';
       image.src = meal.image;
       image.alt = meal.name + ' at Afrinaija Pot';
-      image.hidden = false;
-      imageStage.classList.remove('is-empty');
+      image.loading = index < 4 ? 'eager' : 'lazy';
+      image.decoding = 'async';
+      image.addEventListener('error', () => {
+        image.remove();
+        media.classList.add('is-empty');
+      }, { once: true });
+      media.append(image);
     } else {
-      image.removeAttribute('src');
-      image.alt = '';
-      image.hidden = true;
-      imageStage.classList.add('is-empty');
+      media.classList.add('is-empty');
     }
+
+    const price = document.createElement('p');
+    price.className = 'menu-food-price';
+    price.textContent = meal.price;
+    media.append(price);
+
+    const information = document.createElement('div');
+    information.className = 'menu-food-information';
+
+    const row = document.createElement('div');
+    row.className = 'menu-food-name-row';
+
+    const name = document.createElement('h3');
+    name.textContent = meal.name;
+
+    const addButton = document.createElement('button');
+    addButton.type = 'button';
+    addButton.className = 'menu-card-order';
+    addButton.textContent = 'Add to order';
+    addButton.setAttribute('aria-label', 'Add ' + meal.name + ' to My Order');
+    addButton.addEventListener('click', () => {
+      selectedMeal = meal;
+      orderProxy.click();
+    });
+
+    const details = document.createElement('div');
+    details.className = 'menu-food-details';
+    const category = document.createElement('span');
+    category.textContent = activeCategory;
+    details.append(category);
+
+    row.append(name, addButton);
+    information.append(row, details);
+    card.append(media, information);
+    return card;
   };
 
-  const moveTo = nextIndex => {
-    finishActiveTransition();
-    const meals = getMeals();
-    const wrappedIndex = (nextIndex + meals.length) % meals.length;
-    const direction = wrappedIndex > activeIndex || (activeIndex === meals.length - 1 && wrappedIndex === 0) ? 1 : -1;
-    createTransition()
-      .to(targets, { autoAlpha: 0, x: -22 * direction, duration: .24, ease: 'power2.in', stagger: .025 })
-      .add(() => {
-        activeIndex = wrappedIndex;
-        applyMeal(activeIndex);
-        gsap.set(targets, { x: 22 * direction });
-      })
-      .to(targets, { autoAlpha: 1, x: 0, duration: .48, ease: 'power3.out', stagger: .035 });
+  const createDrinksShowcase = drinks => {
+    const showcase = document.createElement('section');
+    showcase.className = 'drinks-showcase';
+    showcase.setAttribute('aria-label', 'Drinks selection');
+
+    const main = document.createElement('div');
+    main.className = 'drinks-showcase-main';
+
+    const copy = document.createElement('header');
+    copy.className = 'drinks-showcase-copy';
+    const eyebrow = document.createElement('p');
+    eyebrow.className = 'drinks-showcase-eyebrow';
+    eyebrow.textContent = 'Afrinaija refreshments';
+    const name = document.createElement('h3');
+    name.className = 'drinks-showcase-name';
+    const description = document.createElement('p');
+    description.className = 'drinks-showcase-description';
+    copy.append(eyebrow, name, description);
+
+    const product = document.createElement('div');
+    product.className = 'drinks-showcase-product';
+    const previousButton = document.createElement('button');
+    previousButton.type = 'button';
+    previousButton.className = 'drinks-showcase-arrow drinks-showcase-previous';
+    previousButton.setAttribute('aria-label', 'Previous drink');
+    previousButton.innerHTML = '<svg viewBox="0 0 28 20" aria-hidden="true"><path d="M26 10H3M10 3l-7 7 7 7" /></svg>';
+    const nextButton = document.createElement('button');
+    nextButton.type = 'button';
+    nextButton.className = 'drinks-showcase-arrow drinks-showcase-next';
+    nextButton.setAttribute('aria-label', 'Next drink');
+    nextButton.innerHTML = '<svg viewBox="0 0 28 20" aria-hidden="true"><path d="M2 10h23M18 3l7 7-7 7" /></svg>';
+    const image = document.createElement('img');
+    image.className = 'drinks-showcase-image';
+    image.decoding = 'async';
+    image.addEventListener('error', () => {
+      image.hidden = true;
+      product.classList.add('is-empty');
+    });
+    product.append(previousButton, image, nextButton);
+
+    const meta = document.createElement('div');
+    meta.className = 'drinks-showcase-meta';
+    const price = document.createElement('p');
+    price.className = 'drinks-showcase-price';
+    const addButton = document.createElement('button');
+    addButton.type = 'button';
+    addButton.className = 'drinks-showcase-order';
+    addButton.textContent = 'Add to order';
+    addButton.addEventListener('click', () => orderProxy.click());
+    meta.append(price, addButton);
+
+    main.append(copy, product, meta);
+
+    const selector = document.createElement('div');
+    selector.className = 'drinks-showcase-selector';
+    selector.setAttribute('role', 'tablist');
+    selector.setAttribute('aria-label', 'Choose a drink');
+    const selectorButtons = drinks.map((drink, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'drinks-showcase-option';
+      button.dataset.drinkIndex = String(index);
+      button.setAttribute('role', 'tab');
+      button.textContent = drink.name;
+      selector.append(button);
+      return button;
+    });
+
+    let switchTimeline;
+    const applyDrink = index => {
+      const drink = drinks[index];
+      activeDrinkIndex = index;
+      selectedMeal = drink;
+      name.textContent = drink.name;
+      description.textContent = drink.description;
+      price.textContent = drink.price;
+      addButton.setAttribute('aria-label', 'Add ' + drink.name + ' to My Order');
+      product.classList.toggle('is-empty', !drink.image);
+      if (drink.image) {
+        image.src = drink.image;
+        image.alt = drink.name + ' at Afrinaija Pot';
+        image.hidden = false;
+      } else {
+        image.removeAttribute('src');
+        image.alt = '';
+        image.hidden = true;
+      }
+      selectorButtons.forEach((button, buttonIndex) => {
+        const isActive = buttonIndex === index;
+        button.setAttribute('aria-selected', String(isActive));
+        button.setAttribute('tabindex', isActive ? '0' : '-1');
+      });
+    };
+
+    const selectDrink = (index, directionHint = 0) => {
+      if (index === activeDrinkIndex || !drinks[index]) return;
+      const direction = directionHint || (index > activeDrinkIndex ? 1 : -1);
+      if (!gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        applyDrink(index);
+        return;
+      }
+
+      switchTimeline?.kill();
+      gsap.killTweensOf([image, name, description, price]);
+      switchTimeline = gsap.timeline({ defaults: { overwrite: true } })
+        .to([image, name, description, price], {
+          autoAlpha: 0,
+          x: -18 * direction,
+          scale: .965,
+          duration: .16,
+          ease: 'power2.in',
+          stagger: .012
+        })
+        .add(() => applyDrink(index))
+        .fromTo([image, name, description, price], {
+          autoAlpha: 0,
+          x: 22 * direction,
+          scale: .96
+        }, {
+          autoAlpha: 1,
+          x: 0,
+          scale: 1,
+          duration: .28,
+          ease: 'power2.out',
+          stagger: .018,
+          clearProps: 'transform,opacity,visibility'
+        });
+    };
+
+    selectorButtons.forEach((button, index) => {
+      button.addEventListener('click', () => selectDrink(index));
+    });
+
+    previousButton.addEventListener('click', () => {
+      selectDrink((activeDrinkIndex - 1 + drinks.length) % drinks.length, -1);
+    });
+    nextButton.addEventListener('click', () => {
+      selectDrink((activeDrinkIndex + 1) % drinks.length, 1);
+    });
+
+    let selectorPointerId = null;
+    let selectorPointerStart = 0;
+    let selectorDragged = false;
+    selector.addEventListener('pointerdown', event => {
+      selectorPointerId = event.pointerId;
+      selectorPointerStart = event.clientX;
+      selectorDragged = false;
+    }, { passive: true });
+    selector.addEventListener('pointermove', event => {
+      if (event.pointerId !== selectorPointerId) return;
+      if (Math.abs(event.clientX - selectorPointerStart) > 6) selectorDragged = true;
+    }, { passive: true });
+    const releaseSelectorPointer = event => {
+      if (event.pointerId !== selectorPointerId) return;
+      selectorPointerId = null;
+      if (event.type === 'pointercancel') selectorDragged = false;
+      else if (selectorDragged) requestAnimationFrame(() => { selectorDragged = false; });
+    };
+    selector.addEventListener('pointerup', releaseSelectorPointer);
+    selector.addEventListener('pointercancel', releaseSelectorPointer);
+    selector.addEventListener('click', event => {
+      if (!selectorDragged) return;
+      event.preventDefault();
+      event.stopPropagation();
+      selectorDragged = false;
+    }, true);
+
+    activeDrinkIndex = Math.min(activeDrinkIndex, drinks.length - 1);
+    applyDrink(activeDrinkIndex);
+    showcase.append(main, selector);
+    return showcase;
   };
 
-  const setCategoryOpen = isOpen => {
-    categoryToggle.setAttribute('aria-expanded', String(isOpen));
-    categoryCard.setAttribute('aria-hidden', String(!isOpen));
-    categoryCard.classList.toggle('is-open', isOpen);
-    gsap.to(categoryToggle.querySelector('svg'), { rotation: isOpen ? 180 : 0, duration: .35, ease: 'power2.out' });
+  const animateCards = () => {
+    if (!gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const cards = [...grid.children];
+    gsap.killTweensOf(cards);
+    gsap.fromTo(cards,
+      { autoAlpha: 0, y: 16, scale: .965 },
+      { autoAlpha: 1, y: 0, scale: 1, duration: .34, stagger: .035, ease: 'power2.out', overwrite: true, clearProps: 'transform,opacity,visibility' }
+    );
   };
 
-  const changeCategory = category => {
-    if (!menuCategories[category]) return;
-    finishActiveTransition();
-    if (category === activeCategory) {
-      setCategoryOpen(false);
+  const renderCards = (animate = true) => {
+    const meals = menuCategories[activeCategory];
+    if (activeCategory === 'Drinks') {
+      grid.classList.add('is-drinks-showcase');
+      grid.replaceChildren(createDrinksShowcase(meals));
+      activeCategoryTitle.textContent = activeCategory;
+      itemCount.textContent = meals.length + (meals.length === 1 ? ' drink' : ' drinks');
+      if (animate) animateCards();
       return;
     }
 
-    setCategoryOpen(false);
-    createTransition()
-      .to(targets, { autoAlpha: 0, x: -22, duration: .24, ease: 'power2.in', stagger: .025 })
-      .add(() => {
-        activeCategory = category;
-        activeIndex = 0;
-        applyMeal(0);
-        updateCategoryButtons();
-        gsap.set(targets, { x: 22 });
-      })
-      .to(targets, { autoAlpha: 1, x: 0, duration: .48, ease: 'power3.out', stagger: .035 });
+    grid.classList.remove('is-drinks-showcase');
+    const fragment = document.createDocumentFragment();
+    meals.forEach((meal, index) => fragment.append(createFoodCard(meal, index)));
+    grid.replaceChildren(fragment);
+    activeCategoryTitle.textContent = activeCategory;
+    itemCount.textContent = meals.length + (meals.length === 1 ? ' dish' : ' dishes');
+    if (animate) animateCards();
   };
 
-  previous.addEventListener('click', () => {
-    finishActiveTransition();
-    moveTo(activeIndex - 1);
-  });
-  next.addEventListener('click', () => {
-    finishActiveTransition();
-    moveTo(activeIndex + 1);
-  });
-  categoryToggle.addEventListener('click', () => setCategoryOpen(categoryToggle.getAttribute('aria-expanded') !== 'true'));
+  const selectCategory = button => {
+    const category = button.dataset.category;
+    if (!menuCategories[category]) return;
+    if (category !== activeCategory) {
+      activeCategory = category;
+      selectedMeal = menuCategories[activeCategory][0];
+      updateCategoryButtons();
+      renderCards();
+    }
+
+    const centeredLeft = button.offsetLeft - (categoryStrip.clientWidth - button.offsetWidth) / 2;
+    categoryStrip.scrollTo({ left: Math.max(0, centeredLeft), behavior: 'smooth' });
+  };
+
   categoryButtons.forEach(button => {
-    button.addEventListener('click', () => changeCategory(button.dataset.category));
-  });
-  document.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      finishActiveTransition();
-      moveTo(activeIndex - 1);
-    }
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      finishActiveTransition();
-      moveTo(activeIndex + 1);
-    }
+    button.addEventListener('click', () => selectCategory(button));
   });
 
-  updateCategoryButtons();
-  applyMeal(0);
-  setupMyOrder({
-    getCurrentSelection: () => {
-      const meal = getMeals()[activeIndex];
-      return {
-        name: meal.name,
-        category: activeCategory,
-        price: meal.price
-      };
+  let pointerId = null;
+  let pointerStart = 0;
+  let scrollStart = 0;
+  let dragged = false;
+  categoryStrip.addEventListener('pointerdown', event => {
+    if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    pointerId = event.pointerId;
+    pointerStart = event.clientX;
+    scrollStart = categoryStrip.scrollLeft;
+    dragged = false;
+  });
+  categoryStrip.addEventListener('pointermove', event => {
+    if (event.pointerId !== pointerId) return;
+    const distance = event.clientX - pointerStart;
+    if (Math.abs(distance) > 5 && !dragged) {
+      dragged = true;
+      categoryStrip.setPointerCapture(pointerId);
     }
+    categoryStrip.scrollLeft = scrollStart - distance;
+  });
+  const releasePointer = event => {
+    if (event.pointerId !== pointerId) return;
+    if (categoryStrip.hasPointerCapture(pointerId)) categoryStrip.releasePointerCapture(pointerId);
+    pointerId = null;
+    if (event.type === 'pointercancel') dragged = false;
+    else if (dragged) requestAnimationFrame(() => { dragged = false; });
+  };
+  categoryStrip.addEventListener('pointerup', releasePointer);
+  categoryStrip.addEventListener('pointercancel', releasePointer);
+  categoryStrip.addEventListener('click', event => {
+    if (!dragged) return;
+    event.preventDefault();
+    event.stopPropagation();
+    dragged = false;
+  }, true);
+
+  updateCategoryButtons();
+  renderCards(false);
+  setupMyOrder({
+    getCurrentSelection: () => ({
+      name: selectedMeal.name,
+      category: activeCategory,
+      price: selectedMeal.price
+    })
   });
 }
 
 function setupMenuEntrance() {
-  const curtain = document.querySelector('.menu-page-entrance');
   const gsap = window.gsap;
-  if (!curtain) return;
-  if (!gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    curtain.remove();
-    return;
-  }
+  if (!gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const header = document.querySelector('.menu-page-header');
-  const kicker = document.querySelector('.menu-page-kicker');
-  const title = document.querySelector('.menu-meal-title');
-  const image = document.querySelector('.menu-meal-image-stage');
-  const controls = [...document.querySelectorAll('.menu-meal-arrow, .menu-meal-meta, .menu-meal-description, .menu-meal-count, .menu-category-toggle, .my-order-floating')];
-  const content = [header, kicker, title, image, ...controls].filter(Boolean);
+  const heading = document.querySelector('.menu-catalogue-heading');
+  const categories = document.querySelector('.menu-category-strip');
+  const summary = document.querySelector('.menu-category-summary');
+  const cards = [...document.querySelectorAll('.menu-food-card')];
+  const opening = [header, heading, categories, summary].filter(Boolean);
 
-  gsap.set(content, { autoAlpha: 0 });
-  gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: () => curtain.remove() })
-    .to(curtain.querySelector('span'), { autoAlpha: 0, y: -16, duration: .3, ease: 'power2.in' })
-    .to(curtain, { yPercent: -100, duration: .78, ease: 'power3.inOut' })
-    .fromTo(header, { y: -20 }, { autoAlpha: 1, y: 0, duration: .5 }, '-=.38')
-    .fromTo(kicker, { y: -12 }, { autoAlpha: 1, y: 0, duration: .45 }, '<.06')
-    .fromTo(title, { scale: .94 }, { autoAlpha: 1, scale: 1, duration: .65 }, '<')
-    .fromTo(image, { y: 42, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: .72 }, '<.06')
-    .fromTo(controls, { y: 18 }, { autoAlpha: 1, y: 0, duration: .48, stagger: .035 }, '-=.44');
+  gsap.killTweensOf([...opening, ...cards]);
+  gsap.timeline({ defaults: { ease: 'power2.out' } })
+    .fromTo(header, { autoAlpha: 0, y: -14 }, { autoAlpha: 1, y: 0, duration: .36 })
+    .fromTo(heading, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: .4 }, '<.04')
+    .fromTo(categories, { autoAlpha: 0, x: 18 }, { autoAlpha: 1, x: 0, duration: .36 }, '<.06')
+    .fromTo(summary, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: .3 }, '<.04')
+    .fromTo(cards,
+      { autoAlpha: 0, y: 16, scale: .965 },
+      { autoAlpha: 1, y: 0, scale: 1, duration: .34, stagger: .035, clearProps: 'transform,opacity,visibility' },
+      '<.02'
+    );
 }
+
+function setupFloatingMenuControls() {
+  const header = document.querySelector('.menu-page-header');
+  const controls = document.querySelector('.menu-scroll-controls');
+  const floatingCart = document.querySelector('.menu-scroll-cart');
+  const originalCart = document.querySelector('.my-order-floating');
+  const originalBadge = document.querySelector('.my-order-badge');
+  const floatingBadge = document.querySelector('.menu-scroll-order-badge');
+  if (!header || !controls || !floatingCart || !originalCart || !originalBadge || !floatingBadge) return;
+
+  const syncBadge = () => {
+    floatingBadge.textContent = originalBadge.textContent;
+    floatingBadge.hidden = originalBadge.hidden;
+    floatingBadge.setAttribute('aria-label', originalBadge.getAttribute('aria-label') || '0 selected items');
+  };
+
+  const setControlsVisible = isVisible => {
+    controls.classList.toggle('is-visible', isVisible);
+    controls.setAttribute('aria-hidden', String(!isVisible));
+  };
+
+  floatingCart.addEventListener('click', () => originalCart.click());
+  new MutationObserver(syncBadge).observe(originalBadge, {
+    attributes: true,
+    attributeFilter: ['hidden', 'aria-label'],
+    childList: true,
+    characterData: true,
+    subtree: true
+  });
+  syncBadge();
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      setControlsVisible(!entry.isIntersecting);
+    }, { threshold: 0.01 });
+    observer.observe(header);
+  } else {
+    let ticking = false;
+    const update = () => {
+      const bounds = header.getBoundingClientRect();
+      setControlsVisible(bounds.bottom <= 0 || bounds.top >= window.innerHeight);
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+  }
+}
+
 setupMenuPage();
 setupMenuEntrance();
-
-
+setupFloatingMenuControls();
