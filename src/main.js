@@ -494,9 +494,10 @@ const testimonials = [
   { name: 'Gaelle Isimbi', text: 'The customer service is top-notch. You feel genuinely welcomed, and the food matches that same energy.' },
   { name: 'Shell Scale', text: 'The food, packaging, delivery and customer service were top-notch. I will definitely be buying from them throughout my stay in Kigali.' },
   { name: 'Stella Omodolapo', text: 'The food is very nice and tastes like home.' },
-  { name: 'hamzahahmed1', text: 'Had jollof rice, egusi soup, chicken and yam \u2014 all great flavours!' },
-  { name: 'Info Divine Custom Cakes', text: 'Service was great and friendly, the food was yummy and the packaging was classy and neat. Highly recommend.' },
-  { name: 'Malcolm Kiiza', text: 'Service and food were great. Definitely recommend.' }
+  { name: 'hamzahahmed1', text: 'Been here twice. Halal food. Had jollof rice, egusi soup, chicken and yam \u2014 all great flavours!' },
+  { name: 'Info Divine Custom Cakes', text: 'Service was great and friendly, food is yummy and the packaging is classy and neat. Highly recommend.' },
+  { name: 'Malcolm Kiiza', text: 'Service and food were great. Definitely recommend.' },
+  { name: 'Sarah K.', text: 'Absolutely loved the authentic taste! The jollof rice was perfectly spiced and the staff made us feel right at home.' }
 ];
 
 function setupTestimonialsStack() {

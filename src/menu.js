@@ -47,7 +47,7 @@ const menuCategories = {
     ['Vegetable', 'RWF 6,000', '/assets/menu/vegetables.png'],
     ['Efo Riro', 'RWF 6,000', '/assets/menu/Efo Riro.jpg'],
     ['Okra', 'RWF 6,000', '/assets/menu/Okra.jpg'],
-    ['Ogbono', 'RWF 7,000', '/assets/menu/ogbono.png'],
+    ['Ogbono', 'RWF 7,000', '/assets/menu/Ogbono.png'],
     ['Bitter Leaf', 'RWF 7,000', '/assets/menu/bitter leaf.png'],
     ['Banga', 'RWF 7,000', '/assets/menu/Banga.jpg'],
     ['Afang', 'RWF 8,000', '/assets/menu/Afang.jpg'],
@@ -61,13 +61,13 @@ const menuCategories = {
   ]),
   Proteins: createMenuItems('Proteins', [
     ['Goat', 'RWF 5,000', '/assets/menu/goat.png'],
-    ['Chicken', 'RWF 4,000', '/assets/menu/chicken.png'],
-    ['Tilapia Fish', 'RWF 5,000', '/assets/menu/tilapia fish.png'],
+    ['Chicken', 'RWF 4,000', '/assets/menu/chicken.jpg'],
+    ['Tilapia Fish', 'RWF 5,000', '/assets/menu/tilapia fish.jpg'],
     ['Titus Fish', 'RWF 5,000', '/assets/menu/titus fish.png?v=20260823-2'],
     ['Beef', 'RWF 4,000', '/assets/menu/beef.png'],
     ['Cow Leg', 'RWF 5,000', '/assets/menu/cow leg.png'],
     ['Assorted Meats', 'RWF 4,000', '/assets/menu/assorted meat.png'],
-    ['Dry Fish', 'RWF 5,000', '/assets/menu/dry fish.png'],
+    ['Dry Catfish', 'RWF 5,000', '/assets/menu/dry catfish.jpg'],
     ['Turkey', 'RWF 6,000', '/assets/menu/turkey.png?v=20260823-2']
   ]),
   Swallow: createMenuItems('Swallow', [
@@ -78,13 +78,13 @@ const menuCategories = {
     ['Garri', 'RWF 4,000', '/assets/menu/garri.png'],
     ['Wheat', 'RWF 3,000', '/assets/menu/wheat.png'],
     ['Oatmeal', 'RWF 5,000', '/assets/menu/oatmeal.png'],
-    ['Plantain Flour', 'RWF 4,000', '/assets/menu/plantain flour.jpg'],
+    ['Plantain Flour', 'RWF 4,000', '/assets/menu/amala.jpg'],
     ['Tuwo Shinkefa', 'RWF 3,000', '/assets/menu/Tuwo Shinkefa.png']
   ]),
   'Vegetarian Foods': createMenuItems('Vegetarian Foods', [
-    ['Vegetable Sauce & Rice', 'RWF 12,000', '/assets/menu/Vegetable Sauce & Rice.png'],
+    ['Vegetable Sauce & Rice', 'RWF 12,000', '/assets/menu/Vegetable Sauce & Rice.jpg'],
     ['Jollof & Vegetable', 'RWF 12,000', '/assets/menu/Jollof & Vegetable.jpg'],
-    ['Special Salad', 'RWF 10,000', '/assets/menu/Special Salad.jpg'],
+    ['Special Salad', 'RWF 10,000', '/assets/menu/Salad.jpeg'],
     ['Spaghetti & Vegetables', 'RWF 12,000', '/assets/menu/Spaghetti & Vegetables.jpg'],
     ['Macaroni & Vegetables', 'RWF 12,000', '/assets/menu/Macaroni & Vegetables.jpg'],
     ['Fried Rice', 'RWF 12,000', '/assets/menu/Fried Rice.jpg'],
@@ -110,10 +110,10 @@ const menuCategories = {
   'Rwandan Specials': createMenuItems('Rwandan Specials', [
     ['Matoke & Beef', 'RWF 7,000', '/assets/menu/Matoke & Beef.jpg'],
     ['Chips & Chicken', 'RWF 8,500', '/assets/menu/chips and chicken.png'],
-    ['Amachaza Rice & Sauce', 'RWF 9,500', '/assets/menu/Amachaza Rice & Sauce.jpg'],
-    ['Rice, Chips & Beans MEA', 'RWF 9,000', '/assets/menu/Rice, Chips & Beans MEA.png'],
+    ['Amashaza Rice & Sauce', 'RWF 9,500', '/assets/menu/Amachaza Rice & Sauce.jpg'],
+    ['Rice, Chips & Beans Meat', 'RWF 9,000', '/assets/menu/Rice, Chips & Beans MEA.png'],
     ['Macaroni & Vegetables', 'RWF 6,000', '/assets/menu/Macaroni & Vegetables.jpg'],
-    ['Buliu', 'RWF 10,000', '/assets/menu/Buliu.jpg'],
+    ['Boilo', 'RWF 10,000', '/assets/menu/Buliu.jpg'],
     ['Pilau Rice & Meat', 'RWF 9,500', '/assets/menu/Pilau Rice & Meat.png'],
     ['Imvange', 'RWF 9,000', '/assets/menu/Imvange.png'],
     ['Spinach & Rice Chips', 'RWF 7,500', '/assets/menu/Spinach & Rice Chips.jpg'],
@@ -121,8 +121,8 @@ const menuCategories = {
   ]),
   'Food Platters': [
     {
-      name: 'Pilau Platter',
-      price: 'RWF 40,000',
+      name: 'Complete Platter for eight',
+      price: 'RWF 80,000',
       image: '/assets/menu/Pilau Platter.jpg',
       description: 'Pilau, chicken or beef, chips, salad and sauce.'
     },
@@ -135,12 +135,12 @@ const menuCategories = {
     {
       name: 'AfriNaija Special Birthday Platter for 10',
       price: 'RWF 300,000',
-      image: '/assets/menu/AfriNaija Special Birthday Platter for 10.jpg',
-      description: 'Bowl of jollof, pilau and fried rice, fried fish and fried chicken, salad, vegetable chips and plantain, sauce, bottle of red or white wine and cake.'
+      image: ['/assets/menu/AfriNaija Special Birthday Platter for 10.jpg', '/assets/menu/small chops.jpg'],
+      description: 'Bowl of jollof, pilau and fried rice, fried fish and fried chicken, salad, vegetable chips and plantain, sauce, bottle of unalcholic wine and red wine with cake.'
     }
   ],
   Drinks: createMenuItems('Drinks', [
-    ['Soda', 'RWF 1,500', '/assets/menu/soft drink soda.png?v=20260828-1'],
+    ['Soda', 'RWF 2,000', '/assets/menu/soft drink soda.png?v=20260828-1'],
     ['Sparkling Water', 'RWF 1,500', '/assets/menu/sparkling water.png'],
     ['Fresh Juice', 'RWF 3,500', '/assets/menu/fresh juice.png'],
     ['Iyange Juice', 'RWF 4,000', '/assets/menu/iyange juice.png?v=20260828-1'],
@@ -148,14 +148,14 @@ const menuCategories = {
     ['Heineken', 'RWF 2,500', '/assets/menu/heineken.png'],
     ['Small Water', 'RWF 1,000', '/assets/menu/small water.png'],
     ['Big Water', 'RWF 2,500', '/assets/menu/big water.png'],
-    ['Skol', 'RWF 1,500', '/assets/menu/skol.png'],
-    ['Guinness', 'RWF 4,000', '/assets/menu/guinness.png'],
+    ['Skol', 'RWF 2,000', '/assets/menu/skol.png'],
+    ['Guinness', 'RWF 5,000', '/assets/menu/guinness.png'],
     ['Savannah', 'RWF 5,000', '/assets/menu/savanna.png'],
     ['Black Tea', 'RWF 4,000', '/assets/menu/black tea.png'],
     ['Green Tea', 'RWF 4,000', '/assets/menu/greentea.png'],
     ['Coffee Black', 'RWF 5,000', '/assets/menu/coffee black.png'],
-    ['Exprso', 'RWF 5,000', '/assets/menu/exprso.png'],
-    ['Maltona', 'RWF 1,500', '/assets/menu/maltona.png']
+    ['Espresso', 'RWF 5,000', '/assets/menu/exprso.png'],
+    ['Guiness Maltina', 'RWF 5,0000', '/assets/menu/guiness malt.png']
   ]),
   Grills: createMenuItems('Grills', [
     ['Full Chicken Suya', 'RWF 18,000', '/assets/menu/Full Chicken Suya.png'],
@@ -173,17 +173,17 @@ const menuCategories = {
     ['Beef Suya', 'RWF 13,000', '/assets/menu/Beef Suya.jpg']
   ]),
   'Pepper Soup': createMenuItems('Pepper Soup', [
-    ['Full Catfish', 'RWF 18,000', '/assets/menu/full catfish.jpg'],
-    ['Full Large Catfish', 'RWF 25,000', '/assets/menu/Full Large Catfish.jpg'],
-    ['Tilapia Fish', 'RWF 15,000', '/assets/menu/tilapia fish.png'],
-    ['Chicken', 'RWF 10,000', '/assets/menu/chicken.png'],
-    ['Goat', 'RWF 15,000', '/assets/menu/goat.png'],
-    ['Beef', 'RWF 10,000', '/assets/menu/beef.png'],
-    ['Assorted Cow Meat', 'RWF 10,000', '/assets/menu/Assorted Cow Meat.jpg'],
-    ['Assorted Goat Meat', 'RWF 12,000', '/assets/menu/Assorted Goat Meat.jpg']
+    ['Full Catfish', 'RWF 18,000', '/assets/menu/catfishpeppersoup.jpg'],
+    ['Full Large Catfish', 'RWF 25,000', '/assets/menu/catfish pepper soup.jpg'],
+    ['Tilapia Fish', 'RWF 15,000', '/assets/menu/tilapia pepper soup.jpg'],
+    ['Chicken', 'RWF 10,000', '/assets/menu/chicken pepper soup.jpg'],
+    ['Goat', 'RWF 18,000', '/assets/menu/goat pepper soup.jpg'],
+    ['Beef', 'RWF 15,000', '/assets/menu/assorted beef pepper soup.jpg'],
+    ['Assorted Cow Meat', 'RWF 15,000', '/assets/menu/assorted cow meat.jpg'],
+    ['Assorted Goat Meat', 'RWF 15,000', '/assets/menu/Assorted Goat Meat soup.jpg']
   ]),
   'Special Order': createMenuItems('Special Order', [
-    ['Ise Ewu', 'RWF 16,000', '/assets/menu/Ise Ewu.png'],
+    ['Isi Ewu', 'RWF 16,000', '/assets/menu/Ise Ewu.png'],
     ['Nkwobi', 'RWF 14,000', '/assets/menu/Nkwobi.png'],
     ['Abacha', 'RWF 10,000', '/assets/menu/Abacha.png'],
     ['Waakye', 'RWF 15,000', '/assets/menu/Waakye.jpg']
@@ -217,17 +217,38 @@ function setupMenuPage() {
     const media = document.createElement('div');
     media.className = 'menu-food-media';
     if (meal.image) {
-      const image = document.createElement('img');
-      image.className = 'menu-food-image';
-      image.src = meal.image;
-      image.alt = meal.name + ' at Afrinaija Pot';
-      image.loading = index < 4 ? 'eager' : 'lazy';
-      image.decoding = 'async';
-      image.addEventListener('error', () => {
-        image.remove();
-        media.classList.add('is-empty');
-      }, { once: true });
-      media.append(image);
+      const images = Array.isArray(meal.image) ? meal.image : [meal.image];
+      const imgContainer = document.createElement('div');
+      imgContainer.style.display = 'flex';
+      imgContainer.style.width = '100%';
+      imgContainer.style.height = '96%';
+      imgContainer.style.alignItems = 'center';
+      imgContainer.style.justifyContent = 'center';
+      imgContainer.style.gap = '8px';
+      imgContainer.style.padding = '0 8px';
+      imgContainer.style.position = 'relative';
+      imgContainer.style.zIndex = '1';
+
+      images.forEach((src) => {
+        const image = document.createElement('img');
+        image.className = 'menu-food-image';
+        image.src = src;
+        image.alt = meal.name + ' at Afrinaija Pot';
+        image.loading = index < 4 ? 'eager' : 'lazy';
+        image.decoding = 'async';
+        if (images.length > 1) {
+          image.style.width = 'calc(50% - 4px)';
+          image.style.height = '100%';
+          image.style.objectFit = 'cover';
+          image.style.borderRadius = '12px';
+        }
+        image.addEventListener('error', () => {
+          image.remove();
+          if (imgContainer.children.length === 0) media.classList.add('is-empty');
+        }, { once: true });
+        imgContainer.append(image);
+      });
+      media.append(imgContainer);
     } else {
       media.classList.add('is-empty');
     }
@@ -263,7 +284,20 @@ function setupMenuPage() {
     details.append(category);
 
     row.append(name, addButton);
-    information.append(row, details);
+    information.append(row);
+
+    if (meal.description) {
+      const desc = document.createElement('p');
+      desc.className = 'menu-food-description';
+      desc.textContent = meal.description;
+      desc.style.margin = '10px 0 0';
+      desc.style.fontSize = 'clamp(13px, 1.2vw, 15px)';
+      desc.style.color = '#455648';
+      desc.style.lineHeight = '1.4';
+      information.append(desc);
+    }
+
+    information.append(details);
     card.append(media, information);
     return card;
   };
