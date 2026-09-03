@@ -519,7 +519,6 @@ function setupTestimonialsStack() {
   stack.append(end);
 
   const cards = [...inner.querySelectorAll('.testimonial-card')];
-  let metrics = [];
   let ticking = false;
 
   const update = () => {
@@ -530,15 +529,21 @@ function setupTestimonialsStack() {
     const itemScale = 0.03;
     const baseScale = 0.85;
     
+    // Dynamically measure the inner container to prevent layout shift bugs on image load
+    const innerRectTop = inner.getBoundingClientRect().top;
+    
     cards.forEach((card, index) => {
-      const nextTop = metrics[index + 1];
-      if (nextTop === undefined) {
+      const nextCard = cards[index + 1];
+      if (!nextCard) {
         card.style.setProperty('--stack-scale', '1');
         return;
       }
 
       const nextStickyTop = stackTop + (index + 1) * 14;
-      const nextViewportTop = nextTop - window.scrollY;
+      
+      // Calculate next card's un-stuck viewport top dynamically
+      // nextCard.offsetTop is a constant relative distance from the inner container's top
+      const nextViewportTop = innerRectTop + nextCard.offsetTop;
       
       // Calculate progress using math similar to React Bits calculateProgress
       // Start scaling when the next card is at 80% of viewport, end when it hits its sticky position
@@ -561,12 +566,6 @@ function setupTestimonialsStack() {
     });
   };
 
-  const measure = () => {
-    const stackDocumentTop = stack.getBoundingClientRect().top + window.scrollY;
-    metrics = cards.map(card => stackDocumentTop + card.offsetTop);
-    update();
-  };
-
   const requestUpdate = () => {
     if (ticking) return;
     ticking = true;
@@ -578,9 +577,11 @@ function setupTestimonialsStack() {
     card.style.zIndex = index + 1;
   });
 
-  measure();
+  // Call update initially
+  update();
+  
   window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', measure);
+  window.addEventListener('resize', requestUpdate);
 }
 function setupBookingTransition() {
   const triggers = [...document.querySelectorAll('.booking-trigger')];
