@@ -50,7 +50,7 @@ const menuCategories = {
     ['Ogbono', 'RWF 7,000', '/assets/menu/Ogbono.png'],
     ['Bitter Leaf', 'RWF 7,000', '/assets/menu/bitter leaf.png'],
     ['Banga', 'RWF 7,000', '/assets/menu/Banga.jpg'],
-    ['Afang', 'RWF 8,000', '/assets/menu/Afang.jpg'],
+    ['Afang', 'RWF 8,000', '/assets/menu/Afang.jpeg'],
     ['Fisherman', 'RWF 10,000', '/assets/menu/fisherman.png'],
     ['White Soup', 'RWF 7,000', '/assets/menu/White Soup.jpg'],
     ['Oha', 'RWF 7,500', '/assets/menu/Oha.jpg'],
