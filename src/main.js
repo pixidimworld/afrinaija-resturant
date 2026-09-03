@@ -524,10 +524,12 @@ function setupTestimonialsStack() {
 
   const update = () => {
     ticking = false;
-    if (reduceMotion.matches) return;
     const viewportHeight = window.innerHeight;
     const stackTop = Math.min(150, Math.max(82, viewportHeight * 0.16));
 
+    const itemScale = 0.03;
+    const baseScale = 0.85;
+    
     cards.forEach((card, index) => {
       const nextTop = metrics[index + 1];
       if (nextTop === undefined) {
@@ -537,9 +539,25 @@ function setupTestimonialsStack() {
 
       const nextStickyTop = stackTop + (index + 1) * 14;
       const nextViewportTop = nextTop - window.scrollY;
-      const progress = Math.min(1, Math.max(0, (viewportHeight * 0.82 - nextViewportTop) / (viewportHeight * 0.82 - nextStickyTop)));
-      const targetScale = 0.88 + index * 0.018;
-      card.style.setProperty('--stack-scale', (1 - progress * (1 - targetScale)).toFixed(4));
+      
+      // Calculate progress using math similar to React Bits calculateProgress
+      // Start scaling when the next card is at 80% of viewport, end when it hits its sticky position
+      const triggerStart = viewportHeight * 0.80;
+      const triggerEnd = nextStickyTop;
+      
+      let progress = 0;
+      if (nextViewportTop < triggerStart) {
+         if (nextViewportTop > triggerEnd) {
+             progress = (triggerStart - nextViewportTop) / (triggerStart - triggerEnd);
+         } else {
+             progress = 1;
+         }
+      }
+
+      const targetScale = baseScale + index * itemScale;
+      const scale = 1 - progress * (1 - targetScale);
+      
+      card.style.setProperty('--stack-scale', scale.toFixed(4));
     });
   };
 
