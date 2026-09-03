@@ -296,7 +296,28 @@ const environmentImages = [
   'res1 (2).jpeg',
   'res1 (3).jpeg',
   'res1 (4).jpeg',
-  'res1(5).jpeg'
+  'res1(5).jpeg',
+  'WhatsApp Image 2026-08-12 at 1.34.19 PM (1).jpeg',
+  'WhatsApp Image 2026-08-12 at 1.34.19 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.34.20 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.34.23 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.31 PM (1).jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.31 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.32 PM (1).jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.32 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.33 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.37 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.40 PM (1).jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.40 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.44 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.45 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.48 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.49 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.52 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.53 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.55 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.56 PM.jpeg',
+  'WhatsApp Image 2026-08-12 at 1.59.59 PM.jpeg'
 ];
 
 function setupExperienceCarousel() {
