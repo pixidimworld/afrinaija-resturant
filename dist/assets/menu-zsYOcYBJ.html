@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore the Rice and Meats menu at Afrinaija Pot." />
+    <title>Menu | Afrinaija Pot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=League+Spartan:wght@700;800&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=League+Spartan:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=League+Spartan:wght@700;800&display=swap" rel="stylesheet" /></noscript>
+    <link rel="icon" href="/assets/images/logo.png" type="image/png" />
+    <link rel="stylesheet" href="/src/menu.css" />
+    <link rel="prefetch" href="/index.html" />
+    <script src="/assets/vendor/gsap.min.js"></script>
+  </head>
+  <body>
+    <main class="menu-page" aria-labelledby="menu-page-title">
+      <header class="menu-page-header">
+        <a class="menu-page-brand" href="/#home">Afrinaija Pot</a>
+        <a class="menu-page-close" href="/#home" aria-label="Return to Afrinaija Pot home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 6l20 20M26 6L6 26" /></svg></a>
+      </header>
+      <section class="menu-catalogue">
+        <div class="menu-catalogue-heading">
+          <p>Explore our kitchen</p>
+          <h1 id="menu-page-title">Our Menu</h1>
+        </div>
+        <nav class="menu-category-strip" aria-label="Menu categories">
+          <div class="menu-category-list">
+          <button type="button" data-category="Rice &amp; Meats" aria-current="true">Rice &amp; Meats</button>
+          <button type="button" data-category="Breakfast">Breakfast</button>
+          <button type="button" data-category="Porridge">Porridge</button>
+          <button type="button" data-category="Soups">Soups</button>
+          <button type="button" data-category="Proteins">Proteins</button>
+          <button type="button" data-category="Swallow">Swallow</button>
+          <button type="button" data-category="Vegetarian Foods">Vegetarian Foods</button>
+          <button type="button" data-category="Shawarma">Shawarma</button>
+          <button type="button" data-category="Food in Liters">Food in Liters</button>
+          <button type="button" data-category="Rwandan Specials">Rwandan Specials</button>
+          <button type="button" data-category="Food Platters">Food Platters</button>
+          <button type="button" data-category="Drinks">Drinks</button>
+          <button type="button" data-category="Grills">Grills</button>
+          <button type="button" data-category="Pepper Soup">Pepper Soup</button>
+          <button type="button" data-category="Special Order">Special Order</button>
+          </div>
+        </nav>
+        <div class="menu-category-summary">
+          <h2 class="menu-active-category">Rice &amp; Meats</h2>
+          <p class="menu-item-count" aria-live="polite">11 dishes</p>
+        </div>
+        <div class="menu-food-grid" aria-live="polite"></div>
+      </section>
+
+      <button class="menu-order-button menu-order-proxy" type="button" tabindex="-1" aria-hidden="true">Add to order</button>
+
+      <button class="my-order-floating" type="button" aria-label="Open My Order">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 11h14l-1 15H10L9 11zM12 11V8a4 4 0 018 0v3" /></svg>
+        <span class="my-order-badge" aria-label="0 selected items" hidden>0</span>
+      </button>
+
+      <div class="menu-scroll-controls" aria-hidden="true">
+        <button class="menu-scroll-cart" type="button" aria-label="Open My Order">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 11h14l-1 15H10L9 11zM12 11V8a4 4 0 018 0v3" /></svg>
+          <span class="menu-scroll-order-badge" aria-label="0 selected items" hidden>0</span>
+        </button>
+        <a class="menu-scroll-exit" href="/#home" aria-label="Return to Afrinaija Pot home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 6l20 20M26 6L6 26" /></svg>
+        </a>
+      </div>
+
+      <div class="order-confirmation-overlay" aria-hidden="true">
+        <button class="order-dialog-backdrop" type="button" data-close-confirmation aria-label="Close confirmation"></button>
+        <section class="order-confirmation-card" role="dialog" aria-modal="true" aria-labelledby="order-confirmation-title">
+          <p class="order-dialog-eyebrow">My Order</p>
+          <h2 id="order-confirmation-title">Added to My Order</h2>
+          <p class="order-confirmation-item"></p>
+          <div class="order-confirmation-actions">
+            <button class="order-secondary-button" type="button" data-continue-confirmation>Continue Exploring</button>
+            <button class="order-primary-button" type="button" data-view-order>View My Order</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="my-order-overlay" aria-hidden="true">
+        <button class="order-dialog-backdrop" type="button" data-close-order aria-label="Close My Order"></button>
+        <section class="my-order-panel" role="dialog" aria-modal="true" aria-labelledby="my-order-title">
+          <header class="my-order-header">
+            <div>
+              <p class="order-dialog-eyebrow">Afrinaija Pot</p>
+              <h2 id="my-order-title">My Order</h2>
+            </div>
+            <button class="my-order-close" type="button" data-close-order aria-label="Close My Order"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 7l18 18M25 7L7 25" /></svg></button>
+          </header>
+          <div class="my-order-items"></div>
+          <p class="my-order-empty">Your order is empty. Continue exploring the menu to add a meal.</p>
+          <footer class="my-order-footer">
+            <div class="my-order-total"><span>Total</span><strong>RWF 0</strong></div>
+            <div class="my-order-actions">
+              <button class="order-secondary-button" type="button" data-continue-order>Continue Exploring</button>
+              <button class="order-primary-button proceed-whatsapp" type="button" disabled>Proceed to WhatsApp</button>
+            </div>
+          </footer>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="/src/menu.js"></script>
+  </body>
+</html>
+
+

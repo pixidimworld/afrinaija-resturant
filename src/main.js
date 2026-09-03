@@ -292,27 +292,11 @@ function setupStaffComposition() {
   observer.observe(composition);
 }
 const environmentImages = [
-  'WhatsApp Image 2026-08-12 at 1.34.19 PM (1).jpeg',
-  'WhatsApp Image 2026-08-12 at 1.34.19 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.34.20 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.34.23 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.31 PM (1).jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.31 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.32 PM (1).jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.32 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.33 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.37 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.40 PM (1).jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.40 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.44 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.45 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.48 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.49 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.52 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.53 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.55 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.56 PM.jpeg',
-  'WhatsApp Image 2026-08-12 at 1.59.59 PM.jpeg'
+  'res1 (1).jpeg',
+  'res1 (2).jpeg',
+  'res1 (3).jpeg',
+  'res1 (4).jpeg',
+  'res1(5).jpeg'
 ];
 
 function setupExperienceCarousel() {
@@ -796,6 +780,38 @@ function setupDeferredImages() {
 
   images.forEach(image => observer.observe(image));
 }
+
+function setupVideoModal() {
+  const trigger = document.querySelector('.about-video-trigger');
+  const modal = document.querySelector('#about-video-modal');
+  if (!trigger || !modal) return;
+
+  const backdrop = modal.querySelector('.video-modal-backdrop');
+  const player = modal.querySelector('.video-modal-player');
+
+  const openModal = () => {
+    modal.classList.add('is-active');
+    modal.setAttribute('aria-hidden', 'false');
+    player.currentTime = 0;
+    player.play().catch(() => {});
+  };
+
+  const closeModal = () => {
+    modal.classList.remove('is-active');
+    modal.setAttribute('aria-hidden', 'true');
+    player.pause();
+  };
+
+  trigger.addEventListener('click', openModal);
+  backdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+      closeModal();
+    }
+  });
+}
+
 setupSmoothScroll();
 setupDeferredImages();
 setupFoldText();
@@ -804,12 +820,12 @@ setupReservationForm();
 setupQuickNavigation();
 setupFoodLoop();
 
-let deferredFeaturesStarted = false;
-const startDeferredFeatures = () => {
-  if (deferredFeaturesStarted) return;
-  deferredFeaturesStarted = true;
+let isHeroReady = false;
+const handleHeroReady = () => {
+  if (isHeroReady) return;
+  isHeroReady = true;
 
-  const initialize = () => {
+  const performPostLoad = () => {
     setupTextLoop();
     setupAboutTextReveal();
     setupAboutDecorations();
@@ -819,15 +835,19 @@ const startDeferredFeatures = () => {
     setupSocialTitle();
     setupTestimonialsStack();
     setupFoodShowcaseWhenNear();
+    setupVideoModal();
   };
 
-  if ('requestIdleCallback' in window) window.requestIdleCallback(initialize, { timeout: 700 });
-  else window.setTimeout(initialize, 32);
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(performPostLoad, { timeout: 700 });
+  } else {
+    window.setTimeout(performPostLoad, 32);
+  }
 };
 
-window.addEventListener('afrinaija:hero-ready', startDeferredFeatures, { once: true });
-if (reduceMotion.matches || document.documentElement.dataset.heroReady === 'true') startDeferredFeatures();
-window.setTimeout(startDeferredFeatures, 3500);
+window.addEventListener('afrinaija:hero-ready', handleHeroReady, { once: true });
+if (reduceMotion.matches || document.documentElement.dataset.heroReady === 'true') handleHeroReady();
+window.setTimeout(handleHeroReady, 3500);
 
 
 
