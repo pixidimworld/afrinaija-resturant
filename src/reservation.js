@@ -1,41 +1,7 @@
-const SUPABASE_URL = 'https://ibfgtoujevkkwckxvvuy.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_qCs28IVC7cPA3-ABWTetiQ_l8jJFCYc';
 const WHATSAPP_NUMBER = '250782647630';
-const SUPABASE_SCRIPT = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 const COMMITMENT_MINIMUM_GUESTS = 5;
 const MAXIMUM_GUESTS = 400;
 const COMMITMENT_PER_GUEST = 20000;
-let clientPromise;
-
-const getSupabaseClient = () => {
-  if (clientPromise) return clientPromise;
-
-  clientPromise = new Promise((resolve, reject) => {
-    const createClient = () => {
-      const client = window.supabase?.createClient?.(SUPABASE_URL, SUPABASE_KEY);
-      if (client) resolve(client);
-      else reject(new Error('Supabase client is unavailable.'));
-    };
-
-    if (window.supabase?.createClient) {
-      createClient();
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = SUPABASE_SCRIPT;
-    script.async = true;
-    script.dataset.supabaseClient = 'true';
-    script.addEventListener('load', createClient, { once: true });
-    script.addEventListener('error', () => reject(new Error('Supabase failed to load.')), { once: true });
-    document.head.append(script);
-  }).catch(error => {
-    clientPromise = undefined;
-    throw error;
-  });
-
-  return clientPromise;
-};
 
 const createWhatsAppUrl = booking => {
   const address = booking.address || 'Not provided';
@@ -149,19 +115,15 @@ export function setupReservationForm() {
     submit.disabled = true;
     submit.classList.add('is-loading');
     status.dataset.state = 'pending';
-    status.textContent = 'Saving your reservation...';
+    status.textContent = 'Processing your reservation...';
 
     try {
-      const client = await getSupabaseClient();
-      const { error } = await client.from('bookings').insert([booking]);
-      if (error) throw error;
-
       const whatsappUrl = isCommitmentReservation
         ? createCommitmentWhatsAppUrl(booking)
         : createWhatsAppUrl(booking);
       form.reset();
       status.dataset.state = 'success';
-      status.textContent = 'Reservation saved. Opening WhatsApp for confirmation...';
+      status.textContent = 'Reservation processed. Opening WhatsApp for confirmation...';
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     } catch (error) {
       console.error('Reservation submission failed:', error);
@@ -179,10 +141,6 @@ export function setupReservationForm() {
     status.textContent = '';
     delete status.dataset.state;
   });
-
-  form.addEventListener('focusin', () => {
-    getSupabaseClient().catch(() => {});
-  }, { once: true });
 
   form.addEventListener('submit', async event => {
     event.preventDefault();

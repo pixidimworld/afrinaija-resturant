@@ -46,7 +46,7 @@ const menuCategories = {
     ['Egusi', 'RWF 6,000', '/assets/menu/egusi.png'],
     ['Vegetable', 'RWF 6,000', '/assets/menu/vegetables.png'],
     ['Efo Riro', 'RWF 6,000', '/assets/menu/Efo Riro.jpg'],
-    ['Okra', 'RWF 6,000', '/assets/menu/Okra.jpg'],
+    ['Okra', 'RWF 6,000', '/assets/menu/Okra.png'],
     ['Ogbono', 'RWF 7,000', '/assets/menu/Ogbono.png'],
     ['Bitter Leaf', 'RWF 7,000', '/assets/menu/bitter leaf.png'],
     ['Banga', 'RWF 7,000', '/assets/menu/Banga.jpg'],
@@ -57,7 +57,8 @@ const menuCategories = {
     ['Ewedu', 'RWF 6,000', '/assets/menu/Ewedu.png'],
     ['Gbegiri', 'RWF 7,000', '/assets/menu/Gbegiri.jpg'],
     ['Egusi Bitter Leaf', 'RWF 7,000', '/assets/menu/Egusi Bitter Leaf.jpg'],
-    ['Groundnuts', 'RWF 6,500', '/assets/menu/Groundnuts.png']
+    ['Groundnuts', 'RWF 6,500', '/assets/menu/Groundnuts.png'],
+        ['Sea food okra', 'RWF 13,000', '/assets/menu/seafood okra.jpg']
   ]),
   Proteins: createMenuItems('Proteins', [
     ['Goat', 'RWF 5,000', '/assets/menu/goat.png'],
@@ -71,9 +72,9 @@ const menuCategories = {
     ['Turkey', 'RWF 6,000', '/assets/menu/turkey.png?v=20260823-2']
   ]),
   Swallow: createMenuItems('Swallow', [
-    ['Pando', 'RWF 5,000', '/assets/menu/pando.png'],
+    ['Pando', 'RWF 5,000', '/assets/menu/fufu.png?v=20260904-2'],
     ['Amala', 'RWF 4,000', '/assets/menu/amala.png'],
-    ['Fufu', 'RWF 3,000', '/assets/menu/fufu.png'],
+    ['Fufu', 'RWF 3,000', '/assets/menu/pando.png?v=20260904-2'],
     ['Semo', 'RWF 3,000', '/assets/menu/semo.png'],
     ['Garri', 'RWF 4,000', '/assets/menu/garri.png'],
     ['Wheat', 'RWF 3,000', '/assets/menu/wheat.png'],

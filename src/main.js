@@ -419,6 +419,18 @@ function setupExperienceCarousel() {
     });
   };
 
+  let autoplayTimer;
+  const resetAutoplay = () => {
+    clearTimeout(autoplayTimer);
+    if (reduceMotion.matches) return;
+    autoplayTimer = setTimeout(() => {
+      if (!dragging) {
+        glideTo(Math.round(state.position) + 1);
+      }
+      resetAutoplay();
+    }, 3500);
+  };
+
   const release = event => {
     if (!dragging) return;
     dragging = false;
@@ -473,9 +485,15 @@ function setupExperienceCarousel() {
     glideTo(Math.round(state.position) + (event.key === 'ArrowRight' ? 1 : -1));
   });
 
+  carousel.addEventListener('pointerdown', resetAutoplay, { passive: true });
+  carousel.addEventListener('pointermove', resetAutoplay, { passive: true });
+  carousel.addEventListener('keydown', resetAutoplay, { passive: true });
+  carousel.addEventListener('wheel', resetAutoplay, { passive: true });
+
   window.addEventListener('resize', render, { passive: true });
   carousel.setAttribute('aria-roledescription', 'draggable carousel');
   render();
+  resetAutoplay();
 }
 function setupExperienceEntrance() {
   const section = document.querySelector('.experience-section');
@@ -506,87 +524,95 @@ const testimonials = [
 ];
 
 function setupTestimonialsStack() {
-  const stack = document.querySelector('.testimonials-stack');
-  const inner = document.querySelector('.testimonials-stack-inner');
-  if (!stack || !inner) return;
+  const init = () => {
+    const stack = document.querySelector('.testimonials-stack');
+    const inner = document.querySelector('.testimonials-stack-inner');
+    if (!stack || !inner) return;
 
-  testimonials.forEach(({ name, text }, index) => {
-    const article = document.createElement('article');
-    article.className = 'testimonial-card';
-    article.style.setProperty('--card-index', index);
-    article.innerHTML = `<div><p class="testimonial-stars" aria-label="5 out of 5 stars">\u2605\u2605\u2605\u2605\u2605</p><p class="testimonial-review">${text}</p></div><div class="testimonial-card-footer"><h3>${name}</h3><span aria-hidden="true">${String(index + 1).padStart(2, '0')}</span></div>`;
-    inner.append(article);
-  });
-
-  const end = document.createElement('div');
-  end.className = 'testimonials-stack-end';
-  end.setAttribute('aria-hidden', 'true');
-  stack.append(end);
-
-  const cards = [...inner.querySelectorAll('.testimonial-card')];
-  let ticking = false;
-
-  const update = () => {
-    ticking = false;
-    const viewportHeight = window.innerHeight;
-    const stackTop = Math.min(150, Math.max(82, viewportHeight * 0.16));
-
-    const itemScale = 0.03;
-    const baseScale = 0.85;
-    
-    // Dynamically measure the inner container to prevent layout shift bugs on image load
-    const innerRectTop = inner.getBoundingClientRect().top;
-    
-    cards.forEach((card, index) => {
-      const nextCard = cards[index + 1];
-      if (!nextCard) {
-        card.style.setProperty('--stack-scale', '1');
-        return;
-      }
-
-      const nextStickyTop = stackTop + (index + 1) * 14;
-      
-      // Calculate next card's un-stuck viewport top dynamically
-      // nextCard.offsetTop is a constant relative distance from the inner container's top
-      const nextViewportTop = innerRectTop + nextCard.offsetTop;
-      
-      // Calculate progress using math similar to React Bits calculateProgress
-      // Start scaling when the next card is at 80% of viewport, end when it hits its sticky position
-      const triggerStart = viewportHeight * 0.80;
-      const triggerEnd = nextStickyTop;
-      
-      let progress = 0;
-      if (nextViewportTop < triggerStart) {
-         if (nextViewportTop > triggerEnd) {
-             progress = (triggerStart - nextViewportTop) / (triggerStart - triggerEnd);
-         } else {
-             progress = 1;
-         }
-      }
-
-      const targetScale = baseScale + index * itemScale;
-      const scale = 1 - progress * (1 - targetScale);
-      
-      card.style.setProperty('--stack-scale', scale.toFixed(4));
+    testimonials.forEach(({ name, text }, index) => {
+      const article = document.createElement('article');
+      article.className = 'testimonial-card';
+      article.style.setProperty('--card-index', index);
+      article.innerHTML = `<div><p class="testimonial-stars" aria-label="5 out of 5 stars">\u2605\u2605\u2605\u2605\u2605</p><p class="testimonial-review">${text}</p></div><div class="testimonial-card-footer"><h3>${name}</h3><span aria-hidden="true">${String(index + 1).padStart(2, '0')}</span></div>`;
+      inner.append(article);
     });
+
+    const end = document.createElement('div');
+    end.className = 'testimonials-stack-end';
+    end.setAttribute('aria-hidden', 'true');
+    stack.append(end);
+
+    const cards = [...inner.querySelectorAll('.testimonial-card')];
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const viewportHeight = window.innerHeight;
+      const stackTop = Math.min(150, Math.max(82, viewportHeight * 0.16));
+
+      const itemScale = 0.03;
+      const baseScale = 0.85;
+      
+      // Dynamically measure the inner container to prevent layout shift bugs on image load
+      const innerRectTop = inner.getBoundingClientRect().top;
+      
+      cards.forEach((card, index) => {
+        const nextCard = cards[index + 1];
+        if (!nextCard) {
+          card.style.setProperty('--stack-scale', '1');
+          return;
+        }
+
+        const nextStickyTop = stackTop + (index + 1) * 14;
+        
+        // Calculate next card's un-stuck viewport top dynamically
+        // nextCard.offsetTop is a constant relative distance from the inner container's top
+        const nextViewportTop = innerRectTop + nextCard.offsetTop;
+        
+        // Calculate progress using math similar to React Bits calculateProgress
+        // Start scaling when the next card is at 80% of viewport, end when it hits its sticky position
+        const triggerStart = viewportHeight * 0.80;
+        const triggerEnd = nextStickyTop;
+        
+        let progress = 0;
+        if (nextViewportTop < triggerStart) {
+           if (nextViewportTop > triggerEnd) {
+               progress = (triggerStart - nextViewportTop) / (triggerStart - triggerEnd);
+           } else {
+               progress = 1;
+           }
+        }
+
+        const targetScale = baseScale + index * itemScale;
+        const scale = 1 - progress * (1 - targetScale);
+        
+        card.style.setProperty('--stack-scale', scale.toFixed(4));
+      });
+    };
+
+    const requestUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    cards.forEach((card, index) => {
+      card.style.setProperty('--stack-top', `calc(clamp(82px, 16vh, 150px) + ${index * 14}px)`);
+      card.style.zIndex = index + 1;
+    });
+
+    // Call update initially
+    update();
+    
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
   };
 
-  const requestUpdate = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  };
-
-  cards.forEach((card, index) => {
-    card.style.setProperty('--stack-top', `calc(clamp(82px, 16vh, 150px) + ${index * 14}px)`);
-    card.style.zIndex = index + 1;
-  });
-
-  // Call update initially
-  update();
-  
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 }
 function setupBookingTransition() {
   const triggers = [...document.querySelectorAll('.booking-trigger')];
@@ -869,6 +895,68 @@ const handleHeroReady = () => {
 window.addEventListener('afrinaija:hero-ready', handleHeroReady, { once: true });
 if (reduceMotion.matches || document.documentElement.dataset.heroReady === 'true') handleHeroReady();
 window.setTimeout(handleHeroReady, 3500);
+
+function setupPreloader() {
+  const preloader = document.getElementById('site-preloader');
+  const percentageEl = document.getElementById('preloader-percentage');
+  
+  if (!preloader || !percentageEl) return;
+
+  if (sessionStorage.getItem('site_loaded')) {
+    preloader.style.display = 'none';
+    return;
+  }
+
+  setTimeout(() => {
+    const urls = new Set();
+    
+    document.querySelectorAll('img').forEach(img => {
+      const src = img.getAttribute('src') || img.dataset.src || img.dataset.deferredSrc;
+      if (src && !src.startsWith('data:')) {
+        urls.add(new URL(src, window.location.href).href);
+      }
+    });
+
+    if (typeof environmentImages !== 'undefined') {
+      environmentImages.forEach(file => {
+        urls.add(new URL(`/assets/environment-images/${file}`, window.location.href).href);
+      });
+    }
+
+    const total = urls.size;
+    let loaded = 0;
+
+    const hidePreloader = () => {
+      percentageEl.textContent = '100%';
+      preloader.classList.add('is-hidden');
+      sessionStorage.setItem('site_loaded', 'true');
+      setTimeout(() => preloader.remove(), 1000);
+    };
+
+    if (total === 0) {
+      hidePreloader();
+      return;
+    }
+
+    const fallbackTimeout = setTimeout(hidePreloader, 35000);
+
+    const checkDone = () => {
+      percentageEl.textContent = `${Math.round((loaded / total) * 100)}%`;
+      if (loaded >= total) {
+        clearTimeout(fallbackTimeout);
+        setTimeout(hidePreloader, 300);
+      }
+    };
+
+    urls.forEach(url => {
+      const img = new Image();
+      img.onload = () => { loaded++; checkDone(); };
+      img.onerror = () => { loaded++; checkDone(); };
+      img.src = url;
+    });
+  }, 0);
+}
+setupPreloader();
 
 
 

@@ -22,6 +22,21 @@
     <script src="/assets/vendor/gsap.min.js"></script>
   </head>
   <body>
+    <!-- Preloader -->
+    <script>
+      if (sessionStorage.getItem('site_loaded')) {
+        document.documentElement.style.setProperty('--preloader-display', 'none');
+      }
+    </script>
+    <div id="site-preloader" class="preloader" style="display: var(--preloader-display, flex);">
+      <img class="preloader-leaf" src="/assets/images/leaf.png" alt="" aria-hidden="true" />
+      <img class="preloader-dish" src="/assets/images/dish-rotate-1.png" alt="" aria-hidden="true" />
+      <div class="preloader-content">
+        <img class="preloader-logo" src="/assets/images/logo.png" alt="Afrinaija Pot Logo" />
+        <div class="preloader-percentage" id="preloader-percentage" aria-live="polite">0%</div>
+      </div>
+    </div>
+
     <main class="hero" id="home">
       <header class="site-header">
         <a class="brand" href="#home" aria-label="Afrinaija Pot home">Afrinaija Pot</a>
